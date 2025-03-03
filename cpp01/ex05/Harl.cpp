@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:45:40 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/06 16:33:34 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:58:47 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,53 @@ void Harl::complain(std::string level)
 
 	std::string tab[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	void (Harl::*ptr[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	Harl f;
+	Harl func_p;
 
 	for(int i = 0; i < 4; i++)
 	{
 		if(level == tab[i])
 		{
-			(f.*ptr[i])();
+			(func_p.*ptr[i])();
 		}
 	}
 
 }
+
+// void Harl::complain(std::string level)
+// {
+
+// 	std::string tab[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+// 	void (Harl::*ptr[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+// 	Harl func_p;
+// 	enum values{DEBUG, INFO, WARNING, ERROR} ;
+// 	values a=DEBUG;
+
+// 	// for(int i = 0; i < 4; i++)
+// 	// {
+// 	// 	if(level == tab[i])
+// 	// 	{
+// 	// 		a = tab[i];
+// 	// 	}
+// 	// }
+// 	if(level == "DEBUG")
+// 		a=DEBUG;
+// 	if(level == "INFO")
+// 		a=INFO;
+// 	if(level == "WARNING")
+// 		a=WARNING;
+// 	if(level == "ERROR")
+// 		a=ERROR;
+// 	switch (a)
+// 	{
+// 		case DEBUG:
+// 			(func_p.*ptr[a])();
+// 		case INFO:
+// 			(func_p.*ptr[a])();
+// 		case WARNING:
+// 			(func_p.*ptr[a])();
+// 		case ERROR:
+// 			(func_p.*ptr[a])();
+
+// 	}
+
+// }

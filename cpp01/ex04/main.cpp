@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:30:15 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/26 16:01:38 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:28:31 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	replacer(std::string *src, std::string s1, std::string s2)
 	int pos;
 	int l1 = s1.length();
 
-	if(s1 == s2)
-	{
-		std::cout << "Error: <to_replace> equal to <replace_by>";
-		return ;
-	}
+	// if(s1 == s2)
+	// {
+	// 	std::cerr << "Error: <to_replace> equal to <replace_by>\n";
+	// 	return ;
+	// }
 	while (true)
 	{
 		pos = src->find(s1);
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cout << "Wrong number of arguments.\nExample: ./sedition <filename> <to_replace> <replace_by>\n";
+		std::cerr << "Wrong number of arguments.\nExample: ./sedition <filename> <to_replace> <replace_by>\n";
 		return (0);
 	}
 
@@ -61,20 +61,32 @@ int main(int argc, char **argv)
 	std::ifstream filein(filename.c_str());
 	if (filein.fail() != 0)
 	{
-		std::cout << "Error regarding infile opening. File doesnt exit or access is denied. \n";
+		std::cerr << "Error regarding infile opening. File doesnt exit or access is denied. \n";
 		return 0;
 	}
 	std::ofstream fileout(filereplace.c_str());
 	if (fileout.fail() != 0)
 	{
-		std::cout << "Error regarding outfile opening. \n";
+		std::cerr << "Error regarding outfile opening. \n";
 		return 0;
 	}
 
+	// if(s1 == s2)
+	// {
+	// 	std::cerr << "Error: <to_replace> is equal to <replaced_by>\n";
+	// 	return 0;
+	// }
+
 	while(std::getline(filein, oldtext))
 	{
-		replacer(&oldtext, s1, s2);
-		fileout << oldtext << std::endl;
+		if(s1 == s2)
+		{
+			fileout << oldtext << std::endl;
+		}
+		else{
+			replacer(&oldtext, s1, s2);
+			fileout << oldtext << std::endl;
+		}
 	}
 
 	return (0);

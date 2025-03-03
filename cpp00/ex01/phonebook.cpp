@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:26:10 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/26 14:08:00 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:19:26 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,12 @@ void PhoneBook::SEARCH(void)
 		aligner(array[j].get_pnumber());
 		std::cout << "|\n";
 	}
-	std::cout << "CHOOSE ID TO ACCESS TO: ";
-	std::cin >> id;
+	do
+	{
+		std::cout << "CHOOSE ID TO ACCESS TO: ";
+		std::getline(std::cin, id);
+	}
+	while(id.length()==0);
 	if (id.length() == 1
 		&& (*id.cbegin() >= '0' && *id.cbegin() <= '7' && (*id.cbegin() -'0') <= range -1))
 	{
@@ -178,6 +182,7 @@ int	main()
 	std::cout << "Type ADD, SEARCH or EXIT\n";
 	while (1)
 	{
+		std::cout << "Phonebook: ";
 		std::getline(std::cin, line);
 		if(!std::cin)
 			return(0);

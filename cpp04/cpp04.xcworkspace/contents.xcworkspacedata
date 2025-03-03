@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:ex01/Animal.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Animal.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Animal.o">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Brain.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Brain.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Brain.o">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Cat.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Cat.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Cat.o">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Dog.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Dog.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Dog.o">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/ex01">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/main.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/main.o">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/Makefile">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/poly.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/poly.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/WrongAnimal.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/WrongAnimal.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:ex01/WrongAnimal.o">
+   </FileRef>
+</Workspace>

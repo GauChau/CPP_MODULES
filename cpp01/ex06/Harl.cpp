@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:45:40 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/24 17:19:19 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:02:30 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,56 @@ void Harl::error(void)
 		<< std::endl;
 
 }
-
 void Harl::complain(std::string level)
 {
-
-	std::string tab[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	enum levs {DEBUG, INFO, WARNING, ERROR};
 	void (Harl::*ptr[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	Harl f;
+	Harl func_p;
+	enum values{DEBUG, INFO, WARNING, ERROR} ;
+	values a;
 
-	for(int i = 0; i < 5; i++)
+	if(level == "DEBUG")
+		a=DEBUG;
+	if(level == "INFO")
+		a=INFO;
+	if(level == "WARNING")
+		a=WARNING;
+	if(level == "ERROR")
+		a=ERROR;
+	switch (a)
 	{
-		if (i == 4)
-		{
-			std::cout <<"[ Probably complaining about insignificant problems ]" << std::endl;
-			break ;
-		}
-		if(level == tab[i])
-		{
-			for (;i < 4; i++)
-				(f.*ptr[i])();
-		}
+		case DEBUG:
+			(func_p.*ptr[0])();
+		case INFO:
+			(func_p.*ptr[1])();
+		case WARNING:
+			(func_p.*ptr[2])();
+		case ERROR:
+			(func_p.*ptr[3])();
+
 	}
 
 }
+
+// void Harl::complain(std::string level)
+// {
+
+// 	std::string tab[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+// 	enum levs {DEBUG, INFO, WARNING, ERROR};
+// 	void (Harl::*ptr[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+// 	Harl f;
+
+// 	for(int i = 0; i < 5; i++)
+// 	{
+// 		if (i == 4)
+// 		{
+// 			std::cout <<"[ Probably complaining about insignificant problems ]" << std::endl;
+// 			break ;
+// 		}
+// 		if(level == tab[i])
+// 		{
+// 			for (;i < 4; i++)
+// 				(f.*ptr[i])();
+// 		}
+// 	}
+
+// }
