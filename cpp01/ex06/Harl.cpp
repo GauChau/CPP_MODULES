@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:45:40 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/03 16:02:30 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:33:40 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void Harl::complain(std::string level)
 	switch (a)
 	{
 		case DEBUG:
-			(func_p.*ptr[0])();
+			(func_p.*ptr[DEBUG])();
 		case INFO:
-			(func_p.*ptr[1])();
+			(func_p.*ptr[INFO])();
 		case WARNING:
-			(func_p.*ptr[2])();
+			(func_p.*ptr[WARNING])();
 		case ERROR:
-			(func_p.*ptr[3])();
+			(func_p.*ptr[ERROR])();
 
 	}
 
