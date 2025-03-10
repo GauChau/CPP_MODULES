@@ -1,6 +1,6 @@
 OUT = ex00
 
-SRC = Bureaucrat.cpp
+SRC = Bureaucrat.cpp main.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -g -std=c++98
 CPP = c++

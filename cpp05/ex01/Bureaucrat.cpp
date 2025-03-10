@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 // Constructors
 Bureaucrat::Bureaucrat()
@@ -73,6 +74,18 @@ void	Bureaucrat::grade_minus()
 		throw GradeTooHighException();
 	else if (this->getGrade() > 149)
 		throw GradeTooLowException();
+}
+
+void	Bureaucrat::signForm(Form &form) const
+{
+	form.beSigned(*this);
+	if(form.getSign())
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	else
+	{
+		std::cout << this->getName() << " couldn't signed " << form.getName() <<
+		" for grade requirement is not met." << std::endl;
+	}
 }
 
 

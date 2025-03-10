@@ -4,6 +4,8 @@
 # include <iostream>
 # include <string>
 
+class Form;
+
 class Bureaucrat
 {
 	public:
@@ -23,6 +25,7 @@ class Bureaucrat
 		int					getGrade() const;
 		void	grade_plus();
 		void	grade_minus();
+		void	signForm(Form &form) const;
 
 		// Exceptions
 		class GradeTooHighException : public std::exception {
