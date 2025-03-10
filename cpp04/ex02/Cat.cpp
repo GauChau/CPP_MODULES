@@ -11,6 +11,7 @@ Cat::Cat(): Animal()
 Cat::Cat(const Cat &copy)
 {
 	*this=copy;
+	// type = new std::string(*copy.type);
 	std::cout << "\e[0;33mCopy Constructor called of Cat\e[0m" << std::endl;
 }
 
@@ -33,11 +34,11 @@ Cat & Cat::operator=(const Cat &assign)
 	return *this;
 }
 
-// //members
-// void Cat::makeSound()
-// {
-// 	std::cout << "\e[0;34mMiaou\e[0m" << std::endl;
-// }
+//members
+void Cat::makeSound() const
+{
+	std::cout << "\e[0;34mMiaou\e[0m" << std::endl;
+}
 // const std::string Cat::getType() const
 // {
 // 	return(this->type);

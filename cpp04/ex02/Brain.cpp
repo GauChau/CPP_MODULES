@@ -40,3 +40,8 @@ void Brain::setIdeas(unsigned int index, std::string content)
 	}
 }
 
+std::string Brain::getIdeas(unsigned int index)
+{
+	return(this->ideas[index]);
+}
+

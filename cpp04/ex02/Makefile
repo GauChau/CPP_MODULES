@@ -1,4 +1,4 @@
-OUT = ex01
+OUT = ex02
 
 SRC = Animal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp Brain.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
