@@ -79,6 +79,23 @@ void AForm::beSigned(Bureaucrat const &agent)
 	}
 }
 
+void AForm::execute(Bureaucrat const & executor) const
+{
+	if (!this->getSign())
+	{
+		throw FormNotSigned();
+	}
+	else if(executor.getGrade() > this->getGrade_exec())
+	{
+		throw GradeTooLow();
+	}
+	else
+	{
+		FormAction();
+	}
+}
+
+
 
 
 // Exceptions
@@ -90,6 +107,11 @@ const char * AForm::GradeTooHigh::what() const throw()
 {
 	return "Grade is too HIGH";
 }
+const char * AForm::FormNotSigned::what() const throw()
+{
+	return "Form is not SIGNED";
+}
+
 
 
 // Stream operators

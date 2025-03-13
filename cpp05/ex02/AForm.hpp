@@ -3,6 +3,9 @@
 
 # include <iostream>
 # include <string>
+#include <fstream>
+#include <filesystem>
+#include <cstdlib>
 #include "Bureaucrat.hpp"
 
 class AForm
@@ -13,7 +16,7 @@ class AForm
 		AForm(const std::string name, bool sign, const int grade_sign, const int grade_exec);
 
 		// Destructor
-		virtual ~AForm()=0;
+		virtual ~AForm();
 
 		// Operators
 		AForm & operator=(const AForm &assign);
@@ -26,7 +29,7 @@ class AForm
 		int getGrade_exec() const;
 		void beSigned(Bureaucrat const &agent );
 		void execute(Bureaucrat const & executor) const;
-		virtual void FormAction(void) = 0;
+		virtual void FormAction(void)const=0;
 
 
 		// Exceptions
@@ -34,6 +37,9 @@ class AForm
 			virtual const char* what() const throw();
 		};
 		class GradeTooHigh : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class FormNotSigned: public std::exception {
 			virtual const char* what() const throw();
 		};
 

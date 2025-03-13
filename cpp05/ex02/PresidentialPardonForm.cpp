@@ -39,10 +39,12 @@ PresidentialPardonForm &	PresidentialPardonForm::operator=( PresidentialPardonFo
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, PresidentialPardonForm const & i )
+std::ostream &			operator<<( std::ostream & stream, PresidentialPardonForm const & object )
 {
-	//o << "Value = " << i.getValue();
-	return o;
+	stream << object.getName() << " has an Exec grade req. of: "<< object.getGrade_exec()
+	<< " and a Signing grade req. of: " << object.getGrade_sign()
+	<< "." <<std::endl;
+	return stream;
 }
 
 
@@ -50,20 +52,9 @@ std::ostream &			operator<<( std::ostream & o, PresidentialPardonForm const & i 
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void	PresidentialPardonForm::FormAction(std::ostream &os)
+void	PresidentialPardonForm::FormAction(void)const
 {
-	os
-	<< "        *                *\n"
-    << "       ***              ***\n"
-    << "      *****            *****\n"
-    << "     *******          *******\n"
-    << "    *********        *********\n"
-    << "   ***********      ***********\n"
-    << "  *************    *************\n"
-    << "       | |              | |\n"
-    << "       | |              | |"
-    << std::endl;
-
+	std::cout<< this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
 /*

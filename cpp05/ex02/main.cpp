@@ -6,7 +6,7 @@
 /*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:03:04 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/12 17:16:49 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/03/12 20:07:43 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main (void)
 	try
 	{
 
-		Bureaucrat ny("NY", 40);
+		Bureaucrat ny("NY", 1);
 		std::cout << ny << std::endl;
 
         ShrubberyCreationForm law("tree");
@@ -46,6 +46,8 @@ int main (void)
         ShrubberyCreationForm law2("tree");
         std::cout << law2;
         ny.signAForm(law2);
+        law.execute(ny);
+        
 	}
 
 	catch (const std::exception &e) {

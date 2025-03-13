@@ -3,6 +3,8 @@
 
 # include <iostream>
 # include <string>
+#include <fstream>
+#include <filesystem>
 # include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm
@@ -15,7 +17,7 @@ class ShrubberyCreationForm : public AForm
 		~ShrubberyCreationForm();
 
 		ShrubberyCreationForm &		operator=( ShrubberyCreationForm const & rhs );
-		void	FormAction(std::ostream &os);
+		void	FormAction(void) const;
 
 	private:
 		std::string _target;

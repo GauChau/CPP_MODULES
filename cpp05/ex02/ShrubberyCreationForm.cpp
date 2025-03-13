@@ -39,10 +39,12 @@ ShrubberyCreationForm &	ShrubberyCreationForm::operator=( ShrubberyCreationForm 
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, ShrubberyCreationForm const & i )
+std::ostream &			operator<<( std::ostream & stream, ShrubberyCreationForm const & object )
 {
-	//o << "Value = " << i.getValue();
-	return o;
+	stream << object.getName() << " has an Exec grade req. of: "<< object.getGrade_exec()
+	<< " and a Signing grade req. of: " << object.getGrade_sign()
+	<< "." <<std::endl;
+	return stream;
 }
 
 
@@ -50,8 +52,15 @@ std::ostream &			operator<<( std::ostream & o, ShrubberyCreationForm const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void	ShrubberyCreationForm::FormAction(std::ostream &os)
+void	ShrubberyCreationForm::FormAction(void)const
 {
+	std::string outfile= this->_target + "_shrubbery";
+	std::ofstream os(outfile);
+	if (os.fail() != 0)
+	{
+		std::cerr << "Error regarding outfile opening. \n";
+		return ;
+	}
 	os
 	<< "        *                *\n"
     << "       ***              ***\n"

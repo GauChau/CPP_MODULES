@@ -1,5 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
+
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
@@ -39,10 +40,12 @@ RobotomyRequestForm &	RobotomyRequestForm::operator=( RobotomyRequestForm const 
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, RobotomyRequestForm const & i )
+std::ostream &			operator<<( std::ostream & stream, RobotomyRequestForm const & object )
 {
-	//o << "Value = " << i.getValue();
-	return o;
+	stream << object.getName() << " has an Exec grade req. of: "<< object.getGrade_exec()
+	<< " and a Signing grade req. of: " << object.getGrade_sign()
+	<< "." <<std::endl;
+	return stream;
 }
 
 
@@ -50,19 +53,10 @@ std::ostream &			operator<<( std::ostream & o, RobotomyRequestForm const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void	RobotomyRequestForm::FormAction(std::ostream &os)
+void	RobotomyRequestForm::FormAction(void)const
 {
-	os
-	<< "        *                *\n"
-    << "       ***              ***\n"
-    << "      *****            *****\n"
-    << "     *******          *******\n"
-    << "    *********        *********\n"
-    << "   ***********      ***********\n"
-    << "  *************    *************\n"
-    << "       | |              | |\n"
-    << "       | |              | |"
-    << std::endl;
+	// std::rand
+
 }
 
 /*
