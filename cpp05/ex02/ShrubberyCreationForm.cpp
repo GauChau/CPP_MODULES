@@ -4,7 +4,7 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target):AForm("Shrub", false, 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target):AForm("ShrubberyCreationForm", false, 145, 137), _target(target)
 {
 
 }
@@ -22,6 +22,7 @@ ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm & src 
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
+	std::cout << "\e[0;31mDestructor called of ShrubberyCreationForm\e[0m" << std::endl;
 }
 
 
@@ -32,10 +33,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 ShrubberyCreationForm &	ShrubberyCreationForm::operator=( ShrubberyCreationForm const & rhs )
 {
 	AForm::operator=(rhs);
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
+	this->_target = rhs._target;
 	return *this;
 }
 
@@ -55,7 +53,7 @@ std::ostream &			operator<<( std::ostream & stream, ShrubberyCreationForm const 
 void	ShrubberyCreationForm::FormAction(void)const
 {
 	std::string outfile= this->_target + "_shrubbery";
-	std::ofstream os(outfile);
+	std::ofstream os(outfile.c_str());
 	if (os.fail() != 0)
 	{
 		std::cerr << "Error regarding outfile opening. \n";

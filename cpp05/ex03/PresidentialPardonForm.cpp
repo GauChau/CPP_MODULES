@@ -4,6 +4,10 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
+PresidentialPardonForm::PresidentialPardonForm()
+	: AForm("NoTarget", false, 25, 5) {
+}
+
 PresidentialPardonForm::PresidentialPardonForm(std::string target):AForm("PresidentialPardonForm", false, 72, 45), _target(target)
 {
 

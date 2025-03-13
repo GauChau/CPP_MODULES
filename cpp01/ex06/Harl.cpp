@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:45:40 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/04 11:33:40 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:27:26 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void Harl::complain(std::string level)
 {
 	void (Harl::*ptr[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	Harl func_p;
-	enum values{DEBUG, INFO, WARNING, ERROR} ;
+	enum values{DEBUG, INFO, WARNING, ERROR};
 	values a;
 
 	if(level == "DEBUG")

@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:03:04 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/13 12:23:06 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:47:15 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
+
+void strtoup(std::string &src)
+{
+    for (unsigned long i = 0; i < src.length(); i++)
+	{
+		src[i] = (char)std::toupper(src[i]);
+	}
+}
 
 int main (void)
 {
@@ -65,8 +74,30 @@ int main (void)
         std::cerr << "Exception 2 caught: " << e.what()<< std::endl;
     }
 
+	try
+	{
+		Intern jean;
+        Bureaucrat Xavier("M. NIEL-ARNAUD", 125);
+		std::string formname = "PreSidentIal PARdOn";
 
-	// john.grade_plus();
-	// std::cout << john << std::endl;
+
+		strtoup(formname);
+		// PresidentialPardonForm *(jean.makeForm(formname, "Henry"));
+		// PresidentialPardonForm form1;
+        AForm* form2;
+        std::cout << "a______________________________________\n";
+		form2 = (jean.makeForm(formname, "Bernard"));
+        std::cout << "b______________________________________\n";
+        Xavier.signAForm(*form2);
+        Xavier.executeForm(*form2);
+        std::cout << *form2<<std::endl;
+        if(form2)
+            delete form2;
+	}
+
+	catch (const std::exception &e) {
+        std::cerr << "Exception 3 caught: " << e.what()<< std::endl;
+    }
+
 	return 0;
 }

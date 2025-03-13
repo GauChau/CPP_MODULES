@@ -4,6 +4,10 @@
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
+RobotomyRequestForm::RobotomyRequestForm():AForm("NoTarget", false, 145, 137)
+{
+
+}
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target):AForm("RobotomyRequestForm", false, 145, 137), _target(target)
 {

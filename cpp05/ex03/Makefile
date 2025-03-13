@@ -1,6 +1,7 @@
-OUT = ex02
+OUT = ex03
 
-SRC = Bureaucrat.cpp main.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+SRC = Bureaucrat.cpp main.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp \
+	Intern.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
 OBJ_FOLDER = obj
 OBJ_FOLDED = $(addprefix $(OBJ_FOLDER)/, $(SRC_OBJS))
