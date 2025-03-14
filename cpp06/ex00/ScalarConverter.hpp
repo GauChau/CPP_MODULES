@@ -2,27 +2,27 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
+#include <sstream>
 # include <string>
+#include <cstring>
+#include <cctype>
 #include <fstream>
 #include <filesystem>
 #include <cstdlib>
-
+#include <cctype>
+#include <limits>
 class ScalarConverter
 {
 
 	public:
 
 		ScalarConverter();
-		ScalarConverter( ScalarConverter const & src );
 		~ScalarConverter();
 
-		ScalarConverter &		operator=( ScalarConverter const & rhs );
 		static void convert(std::string src);
 
 	private:
 
 };
-
-std::ostream &			operator<<( std::ostream & o, ScalarConverter const & i );
 
 #endif /* ************************************************* SCALARCONVERTER_H */
