@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:21:32 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/18 15:25:35 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:40:47 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int main(int argc, char **argv)
 {
+	if (argc!=2)
+		return 0;
 	std::string test(argv[1]);
 	ScalarConverter uno;
 	uno.convert(test);
