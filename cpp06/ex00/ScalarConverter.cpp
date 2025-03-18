@@ -96,10 +96,10 @@ void pint(int i, std::string src)
 		std::cout << "int : overflow" << std::endl;
 	else
 	{
-		i = atol(src.c_str());
-		if (strisfloatable(src)==-1)
-			std::cout << "int : " << "impossible" << std::endl;
-		else
+		// i = atol(src.c_str());
+		// if (strisfloatable(src)==-1)
+			// std::cout << "int : " << "impossible" << std::endl;
+		// else
 			std::cout << "int : " << i << std::endl;
 	}
 }
