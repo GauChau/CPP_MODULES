@@ -94,33 +94,30 @@ void ScalarConverter::convert(std::string src)
 	std::string impossible("impossible");
 	std::string nan("nan");
 	std::string NonDisplay("Non displayable");
-	std::cout<<"src: "<<src<<std::endl;
-	std::stringstream res(src);
-	std::stringstream res2;
 
-	res >> i_c;
-	c = i_c;
-	res.seekg(0, std::ios::beg);
-	// std::cout << "intchar : " << i_c << std::endl;
-	if (!strisfloatable(src))
+	// char conversion
+	c = (char)atol(src.c_str());
+	if (!strisfloatable(src) || (c > 127 || c < 0) || src.length() > 3)
 		std::cout << "char : " << impossible << std::endl;
-	else if(i_c <= 127 && !isprint(i_c))
+	else if(!isprint((int)c))
 		std::cout << "char : " << NonDisplay << std::endl;
-	else if (i_c > 127)
-		std::cout << "char : " << impossible << std::endl;
 	else
 		std::cout << "char : " << c << std::endl;
 
-	// res >> i;
-	// res.seekg(0, std::ios::beg);
-	i = atol(src.c_str());
-	if (!strisfloatable(src))
-		std::cout << "int : " << impossible << std::endl;
+	//int conversion
+	if(atol(src.c_str())> 2147483647 || atol(src.c_str())< -2147483648)
+		std::cout << "int : overflow" << std::endl;
 	else
-		std::cout << "int : " << i << std::endl;
+	{
+		i = atol(src.c_str());
+		if (!strisfloatable(src))
+			std::cout << "int : " << impossible << std::endl;
+		else
+			std::cout << "int : " << i << std::endl;
+	}
 
-	// res >> f;
-	// res.seekg(0, std::ios::beg);
+
+	//float conversion
 	f = atof(src.c_str());
 	if (!strisfloatable(src))
 		std::cout << "float : " << nan << "f"<<std::endl;
@@ -131,12 +128,12 @@ void ScalarConverter::convert(std::string src)
 	else
 		std::cout << "float : " << f << "f"<<std::endl;
 
-	// res >> d;
-	// res.seekg(0, std::ios::beg);
+
+	// double conversion
 	d = atof(src.c_str());
 	if (!strisfloatable(src))
 		std::cout << "double : " << nan << std::endl;
-	else if (d == (int)d)
+	else if (d == (long long)d)
 	{
 		std::cout << "double : " << d << ".0"<<std::endl;
 	}
