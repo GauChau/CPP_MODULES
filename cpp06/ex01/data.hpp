@@ -7,7 +7,7 @@
 
 struct Data
 {
-	uintptr_t value;
+	uintptr_t data;
 };
 
 

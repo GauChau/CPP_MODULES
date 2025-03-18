@@ -10,11 +10,6 @@ class Serializer
 
 	public:
 
-		Serializer();
-		Serializer( Serializer const & src );
-		~Serializer();
-
-		Serializer &		operator=( Serializer const & rhs );
 		static uintptr_t serialize(Data *ptr);
 		static Data* deserialize(uintptr_t raw);
 
@@ -22,6 +17,5 @@ class Serializer
 
 };
 
-std::ostream &			operator<<( std::ostream & o, Serializer const & i );
 
 #endif /* ****************************************************** SERIALIZER_H */
