@@ -28,25 +28,25 @@ ScalarConverter::~ScalarConverter()
 ** --------------------------------- METHODS ----------------------------------
 */
 
-static int strisnum(std::string &src)
-{
-    for (unsigned long i = 0; i < src.length(); i++)
-	{
-		if(!isdigit(src[i]))
-			return 0;
-	}
-	return 1;
-}
+// static int strisnum(std::string &src)
+// {
+//     for (unsigned long i = 0; i < src.length(); i++)
+// 	{
+// 		if(!isdigit(src[i]))
+// 			return 0;
+// 	}
+// 	return 1;
+// }
 
-static int strisprint(std::string &src)
-{
-    for (unsigned long i = 0; i < src.length(); i++)
-	{
-		if(!isprint(src[i]))
-			return 0;
-	}
-	return 1;
-}
+// static int strisprint(std::string &src)
+// {
+//     for (unsigned long i = 0; i < src.length(); i++)
+// 	{
+// 		if(!isprint(src[i]))
+// 			return 0;
+// 	}
+// 	return 1;
+// }
 
 static int strisfloatable(std::string &src)
 {
@@ -79,7 +79,7 @@ static int strisfloatable(std::string &src)
 		return 3;
 	return 1;
 }
-void	pchar(char c, std::string src)
+void	pchar(char c)
 {
 		// char conversion
 	if (c > 127 || c < 0)
@@ -140,7 +140,7 @@ static void charto(std::string src)
 	if (d == (int)d)
 		fillerd = ".0";
 
-	pchar(c,src);
+	pchar(c);
 	pint(i, src);
 	pfloat(f);
 	pdouble(d);
@@ -167,7 +167,7 @@ static void intto(std::string src)
 	if (d == (int)d)
 		fillerd = ".0";
 
-	pchar(c,src);
+	pchar(c);
 	pint(i, src);
 	pfloat(f);
 	pdouble(d);
@@ -188,7 +188,7 @@ static void floatto(std::string src)
 	if (d == (int)d)
 		fillerd = ".0";
 
-	pchar(c,src);
+	pchar(c);
 	pint(i, src);
 	pfloat(f);
 	pdouble(d);
@@ -210,7 +210,7 @@ static void doubleto(std::string src)
 	if (d == (int)d)
 		fillerd = ".0";
 
-	pchar(c,src);
+	pchar(c);
 	pint(i, src);
 	pfloat(f);
 	pdouble(d);
@@ -219,12 +219,6 @@ static void doubleto(std::string src)
 
 void ScalarConverter::convert(std::string src)
 {
-
-	int i;
-	double d;
-	int i_c;
-	char c;
-	float f;
 
 	std::string impossible("impossible");
 	std::string nan("nan");
