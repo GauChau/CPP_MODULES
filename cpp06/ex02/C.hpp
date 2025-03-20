@@ -9,7 +9,7 @@ class C: public Base
 {
 
 	public:
-
+	C(){};
 	private:
 
 };
