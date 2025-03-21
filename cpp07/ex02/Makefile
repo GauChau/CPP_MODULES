@@ -5,7 +5,7 @@ SRC_OBJS = $(SRC:.cpp=.o)
 OBJ_FOLDER = obj
 OBJ_FOLDED = $(addprefix $(OBJ_FOLDER)/, $(SRC_OBJS))
 FLAGS = -Wall -Wextra  -g -std=c++98
-CPP = c++
+CPP = g++
 
 all: $(OUT)
 
