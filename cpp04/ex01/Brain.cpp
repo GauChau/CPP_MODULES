@@ -24,6 +24,7 @@ Brain::~Brain()
 // Operators
 Brain & Brain::operator=(const Brain &assign)
 {
+	std::cout << "\e[0;33m = called of Brain\e[0m" << std::endl;
 	for(unsigned int i = 0; i < this->_nbIdeas; i++)
 	{
 		if (assign.ideas[i].length()>0)
@@ -38,5 +39,15 @@ void Brain::setIdeas(unsigned int index, std::string content)
 	{
 		this->ideas[index].assign(content);
 	}
+}
+
+std::string Brain::getIdeas(unsigned int index)
+{
+	if (index < this->_nbIdeas)
+	{
+		return(this->ideas[index]);
+	}
+	else
+		return NULL;
 }
 

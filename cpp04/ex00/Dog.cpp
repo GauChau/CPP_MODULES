@@ -30,10 +30,10 @@ Dog & Dog::operator=(const Dog &assign)
 }
 
 // //members
-// void Dog::makeSound()const
-// {
-// 	std::cout << "\e[0;34mOuaf.\e[0m" << std::endl;
-// }
+void Dog::makeSound()const
+{
+	std::cout << "\e[0;34mOuaf.\e[0m" << std::endl;
+}
 // std::string Dog::getType()const
 // {
 // 	return(this->type);

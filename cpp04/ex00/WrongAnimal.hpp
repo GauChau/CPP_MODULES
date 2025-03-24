@@ -24,16 +24,4 @@ class WrongAnimal
 
 };
 
-class WrongCat : public WrongAnimal
-{
-	public:
-	// Constructors
-		WrongCat();
-		WrongCat(const WrongCat &copy);
-
-		WrongCat & operator=(const WrongCat &assign);
-	// Destructor
-	~WrongCat();
-};
-
 #endif

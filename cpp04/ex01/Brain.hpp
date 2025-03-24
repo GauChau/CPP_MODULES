@@ -17,6 +17,7 @@ class Brain
 		// Operators
 		Brain & operator=(const Brain &assign);
 		void setIdeas(unsigned int index, std::string content);
+		std::string getIdeas(unsigned int index);
 
 	protected :
 		const static unsigned int _nbIdeas = 100;

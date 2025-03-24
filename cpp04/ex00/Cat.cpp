@@ -29,10 +29,10 @@ Cat & Cat::operator=(const Cat &assign)
 }
 
 // //members
-// void Cat::makeSound()
-// {
-// 	std::cout << "\e[0;34mMiaou\e[0m" << std::endl;
-// }
+void Cat::makeSound() const
+{
+	std::cout << "\e[0;34mMiaou\e[0m" << std::endl;
+}
 // const std::string Cat::getType() const
 // {
 // 	return(this->type);

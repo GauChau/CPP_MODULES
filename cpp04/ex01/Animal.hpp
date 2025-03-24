@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
+/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:20:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/27 15:22:28 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/03/24 14:36:49 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,6 +1,6 @@
-OUT = Poly
+OUT = ex00
 
-SRC = Animal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp
+SRC = Animal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror -g -std=c++98
 CPP = c++

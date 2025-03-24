@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:20:04 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/19 14:16:18 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:07:55 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ class Dog : public Animal
 		Dog & operator=(const Dog &assign);
 
 		// //members
-		// void makeSound()const;
+		void makeSound()const;
 		// std::string getType()const;
+		Brain *getBrain();
 
 	private:
 		Brain *cerv;

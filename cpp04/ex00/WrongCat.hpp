@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:20:19 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/24 12:14:19 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:47:03 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef WrongCat_HPP
+# define WrongCat_HPP
 
 # include <iostream>
 # include <string>
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
-class Cat : public Animal
+class WrongCat : public WrongAnimal
 {
 	public:
 		// Constructors
-		Cat();
-		Cat(const Cat &copy);
+		WrongCat();
+		WrongCat(const WrongCat &copy);
 
 		// Destructor
-		~Cat();
+		~WrongCat();
 
 		// Operators
-		Cat & operator=(const Cat &assign);
+		WrongCat & operator=(const WrongCat &assign);
 
 		// //members
-		void makeSound() const;
+		void makeSound();
 		// const std::string getType()const;
 
 	private:

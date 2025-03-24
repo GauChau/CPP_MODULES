@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:20:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/02/19 11:41:31 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:17:57 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ class Animal
 		Animal(const Animal &copy);
 
 		// Destructor
-		~Animal();
+		virtual ~Animal();
 
 		// Operators
 		Animal & operator=(const Animal &assign);
 
 		//members
-		void makeSound() const;
+		virtual void makeSound() const;
 		std::string getType() const;
 
 	protected :

@@ -42,6 +42,11 @@ void Brain::setIdeas(unsigned int index, std::string content)
 
 std::string Brain::getIdeas(unsigned int index)
 {
-	return(this->ideas[index]);
+	if (index < this->_nbIdeas)
+	{
+		return(this->ideas[index]);
+	}
+	else
+		return NULL;
 }
 

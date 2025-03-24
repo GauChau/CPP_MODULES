@@ -29,6 +29,8 @@ Cat & Cat::operator=(const Cat &assign)
 {
 	if(this != &assign)
 	{
+		if(this->cerv)
+			delete this->cerv;
 		this->cerv = new Brain(*assign.cerv);
 	}
 	return *this;

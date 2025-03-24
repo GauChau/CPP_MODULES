@@ -10,7 +10,7 @@ Dog::Dog()
 
 Dog::Dog(const Dog &copy)
 {
-	this->type = copy.type;
+	*this = copy;
 	std::cout << "\e[0;33mCopy Constructor called of Dog\e[0m" << std::endl;
 }
 
@@ -28,6 +28,8 @@ Dog &Dog::operator=(const Dog &assign)
 {
 	if(this != &assign)
 	{
+		if(this->cerv)
+			delete this->cerv;
 		this->cerv = new Brain(*assign.cerv);
 	}
 	return *this;

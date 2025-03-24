@@ -24,6 +24,7 @@ Animal::~Animal()
 // Operators
 Animal & Animal::operator=(const Animal &assign)
 {
+	std::cout << "\e[0;33m = called of ANIMAL\e[0m" << std::endl;
 	this->type = assign.type;
 	return *this;
 }
@@ -31,12 +32,7 @@ Animal & Animal::operator=(const Animal &assign)
 //members
 void Animal::makeSound()const
 {
-	if (this->type == "Cat")
-		std::cout << "\e[0;34mMiaou\e[0m" << std::endl;
-	else if (this->type == "Dog")
-		std::cout << "\e[0;34mOuaf\e[0m" << std::endl;
-	else
-		std::cout << "\e[0;34mStrange Noise\e[0m" << std::endl;
+	std::cout << "\e[0;34mStrange Noise\e[0m" << std::endl;
 }
 std::string Animal::getType()const
 {
