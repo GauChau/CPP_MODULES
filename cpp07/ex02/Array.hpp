@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
+/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:58:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/20 17:21:11 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/03/27 12:26:18 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <iostream>
 # include <string>
 #include <fstream>
-#include <filesystem>
 #include <cstdlib>
 #include <stdexcept>
+#include <cstddef>
 
 template <typename T>
 class Array
@@ -29,12 +29,14 @@ class Array
 		Array();
 		Array(unsigned int n);
 		Array(Array &copy);
-		Array& operator=(Array &src);
-		Array& operator[](size_t i);
+		Array& operator=(const Array &src);
+		T& operator[](unsigned int i);
 		~Array();
+
+		unsigned int size(void);
 	private :
 		T	*array;
-		size_t len;
+		unsigned int len;
 };
 #include "Array.tpp"
 
