@@ -6,12 +6,13 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:21:42 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/27 12:42:25 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:53:00 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <stdexcept>
+#include "Array.hpp"
 
 
 template <typename T>

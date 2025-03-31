@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:06:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/20 14:06:55 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:15:14 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 #include <cstdlib>
 
 
-void increment(int& n) {
-    n += 10;  // Modifies the original element in the array
+void increment(int& n)
+{
+    n += 10;  // incremente de 10 l'element
 }
 
 int main( void )

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
+/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:58:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/27 16:12:38 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/03/31 15:10:11 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,17 @@
 template <typename T>
 typename T::iterator easyfind(T &a, int b)
 {
-	return  (find(a.begin(), a.end(), b));
+	typename T::iterator res;
+
+	res = find(a.begin(), a.end(), b);
+	if(res == a.end())
+	{
+		std::cerr << b << ": ";
+		throw std::out_of_range("value not found.");
+		// std::cout << "target not found" << std::endl;
+		// return (0);
+	}
+	return res;
 }
 
 #endif

@@ -1,6 +1,6 @@
-OUT = ex02
+OUT = ex01
 
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
 OBJ_FOLDER = obj
 OBJ_FOLDED = $(addprefix $(OBJ_FOLDER)/, $(SRC_OBJS))

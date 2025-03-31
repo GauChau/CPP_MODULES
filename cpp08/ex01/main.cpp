@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:06:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/31 15:12:10 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:23:50 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <filesystem>
 #include <cstdlib>
 #include <cstddef>
-#include "easyfind.hpp"
+#include "Span.hpp"
 #include <vector>
 
 // template <typename T>
@@ -33,11 +33,10 @@ int main()
 	try
 	{
 		{
-			std::vector<int>::iterator target;
-			target = easyfind(A, 14);
-			target = easyfind(A, 1);
-			target = easyfind(A, 45);
-			target = easyfind(A, 214);
+			Span dpan(5);
+			dpan.addNumber(A.begin(), A.end());
+			std::cout << dpan.shortestSpan()<<std::endl;
+			std::cout << dpan.longestSpan()<<std::endl;
 		}
 
 	}
