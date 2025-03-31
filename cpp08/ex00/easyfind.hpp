@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:58:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/27 12:26:18 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:12:38 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#ifndef ARRAY_HPP
-# define ARRAY_HPP
+#ifndef EASY_FIND_HPP
+# define EASY_FIND_HPP
 
 # include <iostream>
 # include <string>
@@ -21,23 +21,12 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <cstddef>
+#include <algorithm>
 
 template <typename T>
-class Array
+typename T::iterator easyfind(T &a, int b)
 {
-	public :
-		Array();
-		Array(unsigned int n);
-		Array(Array &copy);
-		Array& operator=(const Array &src);
-		T& operator[](unsigned int i);
-		~Array();
-
-		unsigned int size(void);
-	private :
-		T	*array;
-		unsigned int len;
-};
-#include "Array.tpp"
+	return  (find(a.begin(), a.end(), b));
+}
 
 #endif
