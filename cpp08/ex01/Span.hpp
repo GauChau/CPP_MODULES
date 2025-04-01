@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:28:34 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/31 17:19:07 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:10:07 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ class Span
 		Span & operator=(const Span &assign);
 
 		// Exceptions
-		class OutOfBounds : public std::exception {
+		class NotEnough : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class ArrayFull : public std::exception {
 			virtual const char* what() const throw();
 		};
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:06:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/31 17:23:50 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:13:09 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,21 @@ int main()
 {
     std::vector<int> A;
 
-	A.push_back(14);
-	A.push_back(1);
-	A.push_back(24);
-	A.push_back(214);
-	A.push_back(134);
+	A.push_back(6);
+	A.push_back(3);
+	A.push_back(17);
+	A.push_back(9);
+	A.push_back(11);
 
 	try
 	{
 		{
-			Span dpan(5);
-			dpan.addNumber(A.begin(), A.end());
+			Span dpan(50);
+			// dpan.addNumber(A.begin(), A.end());
+			// dpan.addNumber(90);
+			dpan.addNumber(190);
+			dpan.addNumber(191);
+			dpan.addNumber(90);
 			std::cout << dpan.shortestSpan()<<std::endl;
 			std::cout << dpan.longestSpan()<<std::endl;
 		}

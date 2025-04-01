@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:28:32 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/31 17:25:41 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:12:15 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ Span::Span()
 Span::Span(unsigned int N): N(N)
 {
 	lowest = 0;
-	longest=0;
+	longest = 0;
 	this->array = std::vector<int>();
+	this->array.reserve(N);
 }
 
 Span::Span(const Span &copy)
@@ -50,21 +51,28 @@ Span & Span::operator=(const Span &assign)
 // Members
 void Span::addNumber(int x)
 {
-	this->array.push_back(x);
+	// std::cout<< "size: "<<this->array.size()<< "x: "<< x<<std::endl;
+	if (this->array.size()< N)
+		this->array.push_back(x);
+	else
+		throw ArrayFull();
 }
 
 
 void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	this->array.insert(this->array.begin(), begin, end);
+	if (this->array.size() + std::distance(begin, end) < N)
+		this->array.insert(this->array.begin(), begin, end);
+	else
+		throw ArrayFull();
 }
 
 
 int Span::shortestSpan(void)
 {
 
-	if (this->N<2)
-		throw OutOfBounds();
+	if (this->array.size() < 2)
+		throw NotEnough();
 	std::sort(this->array.begin(),this->array.end());
 	std::vector<int> result(this->array.size());
 
@@ -92,8 +100,8 @@ int Span::shortestSpan(void)
 
 int Span::longestSpan(void)
 {
-	if (N<2)
-		throw OutOfBounds();
+	if (this->array.size() <2)
+		throw NotEnough();
 	std::sort(this->array.begin(),this->array.end());
 	int min = this->array.front();
 	int max = this->array.back();
@@ -104,7 +112,12 @@ int Span::longestSpan(void)
 
 
 // Exceptions
-const char * Span::OutOfBounds::what() const throw()
+const char * Span::NotEnough::what() const throw()
 {
-	return "Span: Out Of Bounds";
+	return "Span: Not Enough Numbers";
+}
+
+const char * Span::ArrayFull::what() const throw()
+{
+	return "Span: ArrayFull";
 }
