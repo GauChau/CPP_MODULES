@@ -48,8 +48,8 @@ class BitcoinExchange
 		class InvalidInput : public std::exception {
 			virtual const char* what() const throw();
 		};
-		class InvalidDate_ys : public std::exception {
-			virtual const char* what() const throw();
+		class InvalidDate_ys {
+			virtual const int joe() const throw();
 		};
 
 		//members

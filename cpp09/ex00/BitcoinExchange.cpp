@@ -207,7 +207,7 @@ const char * BitcoinExchange::InvalidDate::what() const throw()
 {
 	return "BTC EXCHANGE: Invalid Date";
 }
-const char * BitcoinExchange::InvalidDate_ys::what() const throw()
+const int BitcoinExchange::InvalidDate_ys::joe() const throw()
 {
 	return 0;
 }
