@@ -32,7 +32,7 @@ ScalarConverter::~ScalarConverter()
 // {
 //     for (unsigned long i = 0; i < src.length(); i++)
 // 	{
-// 		if(!isdigit(src[i]))
+// 		if(!unsigned intt(src[i]))
 // 			return 0;
 // 	}
 // 	return 1;
