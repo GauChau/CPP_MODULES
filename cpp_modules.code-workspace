@@ -62,7 +62,25 @@
 			"typeinfo": "cpp",
 			"cstring": "cpp",
 			"filesystem": "cpp",
-			"*.tpp": "cpp"
+			"*.tpp": "cpp",
+			"__locale": "cpp",
+			"__verbose_abort": "cpp",
+			"bitset": "cpp",
+			"ios": "cpp",
+			"locale": "cpp",
+			"mutex": "cpp",
+			"print": "cpp",
+			"__bit_reference": "cpp",
+			"__hash_table": "cpp",
+			"__node_handle": "cpp",
+			"__split_buffer": "cpp",
+			"__threading_support": "cpp",
+			"complex": "cpp",
+			"execution": "cpp",
+			"queue": "cpp",
+			"stack": "cpp",
+			"variant": "cpp",
+			"map": "cpp"
 		}
 	}
 }

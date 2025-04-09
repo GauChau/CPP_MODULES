@@ -11,6 +11,15 @@
 #include <vector>
 #include <map>
 
+typedef struct s_date
+{
+	std::string year;
+	std::string month;
+	std::string day;
+
+}t_date;
+
+
 class BitcoinExchange
 {
 	public:
@@ -36,7 +45,8 @@ class BitcoinExchange
 		};
 
 		//members
-		void filldb(std::string dbin);
+		void	filldb(std::string dbin);
+		int		DateChecker(std::string date);
 		
 	private:
 		std::map<std::string, float> _data;
