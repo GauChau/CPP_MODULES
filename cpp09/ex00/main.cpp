@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 02:05:23 by gautierchau       #+#    #+#             */
-/*   Updated: 2025/04/09 15:58:33 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:31:20 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,63 +16,44 @@
 #include <iomanip>
 #include <iostream>
 
-int		DateChecker(std::string date)
-{
-	t_date dday;
-	size_t dash =0;
 
-	dash = date.find("-");
-	if(dash != std::string::npos)
+int main(int argc, char **argv)
+{
+
+	if (argc != 2)
+		return 0;
+
+	
+	BitcoinExchange tester("data.csv");
+	std::ifstream sinput;
+	std::string data;
+	sinput.open(argv[1]);
+	if (!sinput.is_open())
 	{
-		dday.year = date.substr(0,dash);
-		date = date.substr(dash+1);
-		dash = date.find("-");
-		if(dash != std::string::npos)
-		{
-			dday.month = date.substr(0, dash);
-			dday.day = date.substr(dash+1);
-			dash = dday.day.find(" ");
-			if(dash != std::string::npos)
-			{
-				std::string::reverse_iterator riter = dday.day.rbegin();
-				while (riter != dday.day.rend() && *riter == ' ')
-				{
-					*riter = '\0';
-					++riter;
-				}
-			}
-		}
+		std::cerr << "Error: could not open file " << argv[1] << std::endl;
+		return 1;
 	}
 
-	// std::cout << "dday.year: "<< dday.year << " dday.month: "<< dday.month << " dday.day: "<< dday.day<< "emd: " << std::endl;
+	while (std::getline(sinput,data))
+	{
+		try
+		{
+			tester.Convert(data);
+		}
+		catch(std::exception& e)
+		{
+			if(dynamic_cast<BitcoinExchange::InvalidInput*>(&e))
+				std::cerr << e.what()<< " : "<< data << '\n';
+			else if(dynamic_cast<BitcoinExchange::InvalidDate*>(&e))
+				std::cerr << e.what()<< " : "<< data.substr(0,10) << '\n';
+			else if(dynamic_cast<BitcoinExchange::InvalidValue*>(&e))
+				std::cerr << e.what()<< " : "<< data .substr(13)<< '\n';
+			else
+				std::cerr << e.what()<< '\n';
+		}
+		
+	}
 
-	return 0;
-}
-
-void	_displayTimestamp( void )
-{
-	std::time_t time = std::time(0);
-	std::tm now = *std::localtime(&time);
-	// std::cout
-	// 	<< "["
-	// 	<< (now.tm_year + 1900)
-	// 	<< std::setfill('-')
-	// 	<< std::setw(2) << now.tm_mon + 1
-	// 	<< std::setw(2) << now.tm_mday //<< "_"
-	// 	// << std::setw(2) << now.tm_hour
-	// 	// << std::setw(2) << now.tm_min
-	// 	// << std::setw(2) << now.tm_sec
-	// 	<< "] ";
-}
-
-
-int main()
-{
-	BitcoinExchange tester("data.csv");
-	DateChecker("2010--120-333          2  ");
-
-	_displayTimestamp();
-
+	std::cerr << "We all have GREAT REGRETS.\n";
 	return 1;
-	// std::cout <<
 }

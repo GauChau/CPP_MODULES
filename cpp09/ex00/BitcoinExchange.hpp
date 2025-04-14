@@ -48,18 +48,23 @@ class BitcoinExchange
 		class InvalidInput : public std::exception {
 			virtual const char* what() const throw();
 		};
-		class InvalidDate_ys {
-			virtual const int joe() const throw();
+		class NegVal : public std::exception {
+			virtual const char* what() const throw();
+		};
+		class InvalidDB : public std::exception {
+			virtual const char* what() const throw();
 		};
 
 		//members
 		void	filldb(std::string dbin);
 		int		DateChecker(std::string date);
+		int		ValueChecker(std::string date);
 		void	Convert(std::string input);
 		int		GregorianChecker(s_date date);
 
 	private:
 		std::map<std::string, float> _data;
+		bool dbcheck;
 
 };
 
