@@ -65,6 +65,7 @@ class BitcoinExchange
 	private:
 		std::map<std::string, float> _data;
 		bool dbcheck;
+		std::string dbfile;
 
 };
 

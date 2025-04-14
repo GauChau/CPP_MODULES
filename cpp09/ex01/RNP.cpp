@@ -6,7 +6,7 @@
 /*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:33:03 by gautierchau       #+#    #+#             */
-/*   Updated: 2025/04/14 22:24:31 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/04/14 23:21:18 by gautierchau      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int strisfloatable(std::string &src)
 {
-
 	int point = 0;
 
 	if(src.length() == 1)
@@ -69,26 +68,18 @@ static int operatordetect(std::string str)
 	return 0;
 }
 // Constructors
-RNP::RNP(std::string input) : _expression(input)
-{
-	
-}
+RNP::RNP(std::string input) : _expression(input){}
 
-RNP::RNP(const RNP &copy)
-{
-}
-
-
+RNP::RNP(const RNP &copy){*this = copy;}
 // Destructor
 RNP::~RNP()
 {
 }
 
-
 // Operators
 RNP & RNP::operator=(const RNP &assign)
 {
-	(void) assign;
+	this->_expression = assign._expression;
 	return *this;
 }
 
@@ -103,21 +94,13 @@ void RNP::Calculate(std::string oper)
 	float c;
 
 	if (oper == "+")
-	{
 		c = a + b;
-	}
 	else if (oper == "-")
-	{
 		c = a - b;
-	}
 	else if (oper == "*")
-	{
 		c = a * b;
-	}
 	else if (oper == "/")
-	{
 		c = a / b;
-	}
 	this->_pile.push(c);
 		return ;
 }
@@ -131,21 +114,14 @@ void RNP::Compute()
 	{
 		if (buffer.length()==0)
 			continue ;
-		std::cout << "atofbuffer is: /" << atof(buffer.c_str()) << "/ and size is: " << this->_pile.size();
 		if((atof(buffer.c_str()) == 0 && !isstrdigit(buffer) && buffer != "-0" && !operatordetect(buffer))
 			|| this->_pile.size() > 2
-			|| strisfloatable(buffer)<0 )//|| buffer.length() ==0)
-		{
-			// std::cout << "buffer 2is: " << buffer;
-			throw BadSyntax();
-		}
-		// if(operatordetect(buffer) && this->_pile.size() != 2)
-		// 	throw BadSyntax();
+			|| strisfloatable(buffer)<0 )
+				throw BadSyntax();
 		else if(operatordetect(buffer))
 			this->Calculate(buffer);
 		else
 			this->_pile.push(atof(buffer.c_str()));
-		std::cout << "and top is: " << this->_pile.top()<<std::endl;
 	}
 	if (this->_pile.size()!=1)
 		throw BadSyntax();
