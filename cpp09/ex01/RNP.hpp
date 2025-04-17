@@ -1,8 +1,8 @@
 #ifndef RNP_HPP
 # define RNP_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <string>
 #include <sstream>
 #include <fstream>
 #include <cstdlib>
