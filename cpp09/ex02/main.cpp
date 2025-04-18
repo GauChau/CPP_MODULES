@@ -24,6 +24,19 @@ std::string joiner(int argc, char **argv)
 	return res;
 }
 
+int highestPowerof2(int n)
+{
+    int res = 0;
+    for (int i = n; i >= 1; i--) {
+        // If i is a power of 2
+        if ((i & (i - 1)) == 0) {
+            res = i;
+            break;
+        }
+    }
+    return res;
+}
+
 int main(int argc, char **argv)
 {
 	if (argc<2)
@@ -34,9 +47,11 @@ int main(int argc, char **argv)
 
 
 	Pmerge *joe= new(Pmerge);
-	
+
 	joe->fillseq(sequence);
 	std::cout <<"fillseq size: "<< sequence.size()<< std::endl;
-	joe->mergelist((joe->_listed)->size(),*joe->_listed);
+	int n = highestPowerof2((joe->_listed)->size());
+	joe->mergelist(n,*joe->_listed);
+
 	return 0;
 }

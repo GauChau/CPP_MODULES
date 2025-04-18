@@ -129,6 +129,7 @@ void pdouble(double d)
 static void charto(std::string src)
 {
 	char c = src.c_str()[0];
+	c = std::atoi(&c);
 	int i = static_cast<int>(c);
 	float f = static_cast<float>(c);
 	double d = static_cast<double>(c);
