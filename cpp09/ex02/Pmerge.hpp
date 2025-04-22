@@ -16,6 +16,7 @@
 #include <iterator>
 #include <cstdio>
 #include <filesystem>
+#include <cmath>
 
 class Pmerge
 {
@@ -36,7 +37,8 @@ class Pmerge
 
 		// Members
 		void	fillseq(std::string);
-		void	mergelist(int n, std::list<int>&);
+		void	mergelist(int npairmax, std::list<int>&);
+		void	sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list<int>::iterator &pend);
 
 		
 		// Exceptions

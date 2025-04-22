@@ -5,6 +5,8 @@
 
 
 
+long _jacobsthal_number(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }
+
 void Pmerge::fillseq(std::string input)
 {
 	std::cout <<"fillseq"<< std::endl;
@@ -23,18 +25,19 @@ void Pmerge::fillseq(std::string input)
 	this->_n = i;
 }
 
-void printlist(std::list<int> joe)
+void printlist(std::list<int> joe, int size)
 {
 	int x =0;
-	for(std::list<int>::iterator i=joe.begin(); i!=joe.end();i++)
+	std::cout << "------ n:"<<size<<" jacob:"<<_jacobsthal_number(size)<< std::endl;
+	for(std::list<int>::reverse_iterator i=joe.rbegin(); i!=joe.rend();i++)
 	{
 
 
-		if (x%4 >1)
+		if (x%size >size/2-1)
 		{
 			std::cout << "\e[0;33m"<< *i << " "<<"\e[0m";
 		}
-		else if(x%4 <=1)
+		else if(x%size <=size/2)
 			std::cout << "\e[0;32m"<< *i << " "<<"\e[0m";
 		else if(x == joe.size()/2)
 			std::cout << "\e[0;31m"<< *i << " "<<"\e[0m";
@@ -43,34 +46,52 @@ void printlist(std::list<int> joe)
 	std::cout << std::endl<< "-----------"<< std::endl;
 }
 
-// void Pmerge::mergelist(int pairsize, std::list<int> &seq)
-// {
-// 	// std::cout <<"mergelistse123q, pairsize: "<< pairsize<< std::endl;
-// 	// printlist(seq);
+void	Pmerge::sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list<int>::iterator &pend)
+{
 
-// 	std::list<int>::reverse_iterator iterb = seq.rbegin(), itera, iterc;
-// 	std::cout <<"b4 conpare    ";
-// 	if (pairsize>2)
-// 		mergelist(pairsize/2, seq);
-// 	printlist(seq);
-// 	while (iterb != seq.rend()&& std::distance(iterb, seq.rend())>=pairsize)
-// 	{
+	std::list<int>::iterator next = pstart, memo = pstart;
 
+	if (std::distance(pstart, pend) > 1)
+	{
+		std::advance(next, 2);
+		while (next != pend)
+		{
+			if (*pstart > *next)
+			{
+				std::iter_swap(pstart, next);
+				pstart = memo;
+				continue ;
+			}
+			std::advance(pstart, 2);
+		}
+	}
+	else
+	{
 
-// 	}
+	}
+}
 
-// 	std::cout <<"after conpare ";
-// 	printlist(seq);
+template <typename T>
+int swap_pair(T block, typename T::iterator a1, typename T::iterator b1, int size)
+{
+	typename T::iterator a2=a1, b2=b1;
 
-// }
+	a2 = std::advance(a2, 1);
+	b2 = std::advance(b2, 1);
+	if (a2 == block.rend() || b2 == block.rend())
+		return 1;
+	std::iter_swap(a1,b1);
+	std::iter_swap(a2,b2);
+	return 0;
+}
 
 void Pmerge::mergelist(int pairsize, std::list<int> &seq)
 {
 	// std::cout <<"mergelistse123q, pairsize: "<< pairsize<< std::endl;
 	// printlist(seq);
 
-	std::list<int>::reverse_iterator iterb = seq.rbegin(), itera, iterc;
-	if (pairsize>2)
+	std::list<int>::reverse_iterator iterb = seq.rbegin(), itera, iterc, iterd;
+	if (pairsize>1)
 		mergelist(pairsize/2, seq);
 	// std::cout<< seq.size() <<" b4 conpare   :\n";
 	// printlist(seq);
@@ -78,35 +99,40 @@ void Pmerge::mergelist(int pairsize, std::list<int> &seq)
 	{
 		itera=iterb;
 		iterc=iterb;
-		std::advance(iterc, (pairsize/2)-1);//std::advance(iterc, 1);
+		if(iterb != seq.rend())
+			std::advance(iterc, 2);
+		else
+			iterc=seq.rend();
+		
 		std::advance(itera, (pairsize/2));
-		std::cout <<"pairl_"<< pairsize<< " step"<< pairsize/2 << " b:"
-				<< *iterb<< " ,a:"<<*itera<< " ,c:"<<*iterc;
-		if (*iterb < *itera)
+		if(pairsize==2)// if(std::distance(iterb,iterc) == 0)
 		{
-			// std::cout << "distance AB: "<<std::distance(iterb,itera)<<"\n";
-			// if (pairsize>1)
-			// 	mergelist(pairsize/2, seq);
-			if(pairsize==2)// if(std::distance(iterb,iterc) == 0)
+			if (*iterb < *itera)
 			{
-				std::cout << " | SWAPED";
+				// std::cout << " | SWAPED";
 				std::iter_swap(itera,iterb);
+			}
+		}
+		else 
+		{
+			if(pairsize==4)
+			{
+				if (*iterb < *itera)
+				{
+					std::swap_ranges(iterb,itera,itera);
+				}
 			}
 			else
 			{
-				std::cout <<"pairl_"<< pairsize<< " step"<< pairsize/2 << " b:"
-				<< *iterb<< " ,a:"<<*itera<< " ,c:"<<*iterc;
-				std::cout << " | RANGESWAPED";
-				std::swap_ranges(itera,iterc,iterb);
+				iterd=itera;
+				std::advance(iterd, pairsize/4);
+				for(int k = 1; k<pairsize/2;k+2)
+				{
 
-				std::cout<<std::endl<< seq.size() <<" after RANGESWAPe: \n";
-
-				std::cout <<"pairl_"<< pairsize<< " step"<< pairsize/2 << " b:"
-				<< *iterb<< " ,a:"<<*itera<< " ,c:"<<*iterc;
-
-				printlist(seq);
+				}
 			}
 		}
+		
 		for (int x=0; x<pairsize;x++)
 		{
 			iterb++;
@@ -118,10 +144,70 @@ void Pmerge::mergelist(int pairsize, std::list<int> &seq)
 		std::cout<<std::endl;
 	}
 
-	std::cout<<std::endl<< seq.size() <<" after conpare: \n";
-	printlist(seq);
+// 	std::cout<<std::endl<< seq.size() <<" after conpare: \n";
+	printlist(seq, pairsize);
 
 }
+
+
+// void Pmerge::mergelist(int pairsize, std::list<int> &seq)
+// {
+// 	// std::cout <<"mergelistse123q, pairsize: "<< pairsize<< std::endl;
+// 	// printlist(seq);
+
+// 	std::list<int>::reverse_iterator iterb = seq.rbegin(), itera, iterc;
+// 	if (pairsize>2)
+// 		mergelist(pairsize/2, seq);
+// 	// std::cout<< seq.size() <<" b4 conpare   :\n";
+// 	// printlist(seq);
+// 	while (iterb != seq.rend()&& std::distance(iterb, seq.rend())>=pairsize)
+// 	{
+// 		itera=iterb;
+// 		iterc=iterb;
+// 		std::advance(iterc, (pairsize/2)-1);//std::advance(iterc, 1);
+// 		std::advance(itera, (pairsize/2));
+// 		std::cout <<"pairl_"<< pairsize<< " step"<< pairsize/2 << " b:"
+// 				<< *iterb<< " ,a:"<<*itera<< " ,c:"<<*iterc;
+// 		if (*iterb < *itera)
+// 		{
+// 			// std::cout << "distance AB: "<<std::distance(iterb,itera)<<"\n";
+// 			// if (pairsize>1)
+// 			// 	mergelist(pairsize/2, seq);
+// 			if(pairsize==2)// if(std::distance(iterb,iterc) == 0)
+// 			{
+// 				std::cout << " | SWAPED";
+// 				std::iter_swap(itera,iterb);
+// 			}
+// 			else
+// 			{
+// 				std::cout <<"pairl_"<< pairsize<< " step"<< pairsize/2 << " b:"
+// 				<< *iterb<< " ,a:"<<*itera<< " ,c:"<<*iterc;
+// 				std::cout << " | RANGESWAPED";
+// 				std::swap_ranges(itera,iterc,iterb);
+
+// 				std::cout<<std::endl<< seq.size() <<" after RANGESWAPe: \n";
+
+// 				std::cout <<"pairl_"<< pairsize<< " step"<< pairsize/2 << " b:"
+// 				<< *iterb<< " ,a:"<<*itera<< " ,c:"<<*iterc;
+
+// 				printlist(seq);
+// 			}
+// 		}
+// 		for (int x=0; x<pairsize;x++)
+// 		{
+// 			iterb++;
+// 			if (iterb == seq.rend())
+// 				break;
+
+// 		}
+// 		// std::cout <<"toaster, pairsize: "<< pairsize<< std::endl;
+// 		std::cout<<std::endl;
+// 	}
+
+// // 	std::cout<<std::endl<< seq.size() <<" after conpare: \n";
+// // 	printlist(seq);
+
+// }
 
 
 
@@ -183,4 +269,7 @@ const char * Pmerge::BadInput::what() const throw()
 {
 	return "Pmerge: Bad Input";
 }
+
+
+
 
