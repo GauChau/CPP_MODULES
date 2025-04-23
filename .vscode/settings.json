@@ -58,7 +58,8 @@
 		"filesystem": "cpp",
 		"*.tpp": "cpp",
 		"map": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"xutility": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }

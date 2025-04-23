@@ -72,80 +72,29 @@ void	Pmerge::sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list
 }
 
 template <typename T>
-int swap_pair(T block, typename T::iterator a1, typename T::iterator b1, int size)
+int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 {
-	typename T::iterator a2=a1, b2=b1;
 
-	a2 = std::advance(a2, 1);
-	b2 = std::advance(b2, 1);
-	if (a2 == block.rend() || b2 == block.rend())
-		return 1;
-	std::iter_swap(a1,b1);
-	std::iter_swap(a2,b2);
+	for(int i=0; i <size;i++)
+	{	
+		if (a == block.rend() || b == block.rend())
+			return 1;
+		std::iter_swap(a,b);
+		std::advance(a, 1);
+		std::advance(b, 1);
+	}
 	return 0;
 }
 
-void Pmerge::mergelist(int pairsize, std::list<int> &seq)
+void Pmerge::mergelist(int level, std::list<int> &seq)
 {
-	// std::cout <<"mergelistse123q, pairsize: "<< pairsize<< std::endl;
-	// printlist(seq);
+	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
+	bool impair = (unit_nbr %2);
+	std::list<int>::iterator a, b, last;
 
-	std::list<int>::reverse_iterator iterb = seq.rbegin(), itera, iterc, iterd;
-	if (pairsize>1)
-		mergelist(pairsize/2, seq);
-	// std::cout<< seq.size() <<" b4 conpare   :\n";
-	// printlist(seq);
-	while (iterb != seq.rend()&& std::distance(iterb, seq.rend())>=pairsize)
-	{
-		itera=iterb;
-		iterc=iterb;
-		if(iterb != seq.rend())
-			std::advance(iterc, 2);
-		else
-			iterc=seq.rend();
-		
-		std::advance(itera, (pairsize/2));
-		if(pairsize==2)// if(std::distance(iterb,iterc) == 0)
-		{
-			if (*iterb < *itera)
-			{
-				// std::cout << " | SWAPED";
-				std::iter_swap(itera,iterb);
-			}
-		}
-		else 
-		{
-			if(pairsize==4)
-			{
-				if (*iterb < *itera)
-				{
-					std::swap_ranges(iterb,itera,itera);
-				}
-			}
-			else
-			{
-				iterd=itera;
-				std::advance(iterd, pairsize/4);
-				for(int k = 1; k<pairsize/2;k+2)
-				{
-
-				}
-			}
-		}
-		
-		for (int x=0; x<pairsize;x++)
-		{
-			iterb++;
-			if (iterb == seq.rend())
-				break;
-
-		}
-		// std::cout <<"toaster, pairsize: "<< pairsize<< std::endl;
-		std::cout<<std::endl;
-	}
-
-// 	std::cout<<std::endl<< seq.size() <<" after conpare: \n";
-	printlist(seq, pairsize);
+	a = seq.begin();
+	b = a;
+	std::advance(b, pow(2,level-1));
 
 }
 
