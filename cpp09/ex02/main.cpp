@@ -36,7 +36,7 @@ int highestPowerof2(int n)
     }
     return res;
 }
-void printlist(std::list<int> joe, int size);
+void printlist(std::list<int> joe, int size, int i);
 int main(int argc, char **argv)
 {
 	if (argc<2)
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	std::cout <<"fillseq size: "<< sequence.size()<< std::endl;
 
 	joe->mergelist(1, *joe->_listed);
-	printlist(*joe->_listed,joe->_listed->size());
+	printlist(*joe->_listed,joe->_listed->size(), 1);
 
 	return 0;
 }

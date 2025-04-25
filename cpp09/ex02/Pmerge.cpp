@@ -5,7 +5,20 @@
 
 
 
-long _jacobsthal_number(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }
+long _jacobsthal_number(long n)
+{
+	return round((pow(2, n + 1) + pow(-1, n)) / 3);
+}
+long next_jack(long n)
+{
+
+	int res=0;
+	for(int i=0;res<n;i++)
+	{
+		res = _jacobsthal_number(i);
+	}
+	return(res);
+}
 
 void Pmerge::fillseq(std::string input)
 {
@@ -25,11 +38,11 @@ void Pmerge::fillseq(std::string input)
 	this->_n = i;
 }
 
-void printlist(std::list<int> joe, int size)
+void printlist(std::list<int> joe, int size, int unit_nbr)
 {
 	int x =1;
 	bool color=0;
-	std::cout << "------ n:"<<size<<" jacob:"<<_jacobsthal_number(size)<< std::endl;
+	std::cout << "------ n:"<<size<<" jacob:"<<next_jack(unit_nbr)<< std::endl;
 	for(std::list<int>::iterator i=joe.begin(); i!=joe.end();i++,x++)
 	{
 
@@ -38,7 +51,7 @@ void printlist(std::list<int> joe, int size)
 		{
 			std::cout << "\e[0;33m"<< *i << " "<<"\e[0m";
 		}
-		else 
+		else
 			std::cout << "\e[0;32m"<< *i << " "<<"\e[0m";
 		// else if(x == joe.size()/2)
 		// 	std::cout << "\e[0;31m"<< *i << " "<<"\e[0m";
@@ -48,7 +61,7 @@ void printlist(std::list<int> joe, int size)
 			x = 0;
 		}
 	}
-	std::cout << std::endl<< "-----------"<< std::endl;
+	std::cout << std::endl;
 }
 
 void	Pmerge::sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list<int>::iterator &pend)
@@ -81,7 +94,7 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 {
 
 	for(int i=0; i <size;i++)
-	{	
+	{
 		if (a == block.end() || b == block.end())
 			return 1;
 		std::iter_swap(a,b);
@@ -94,8 +107,8 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 void Pmerge::mergelist(int level, std::list<int> &seq)
 {
 	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
-	bool impair = !(unit_nbr %2);
-	std::list<int>::iterator a, b, last;
+	int impair = (unit_nbr %2);
+	std::list<int>::iterator a, b, a_end, b_end;
 
 	std::cout<<"\nB4 psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl;
 	if (unit_nbr < 2)
@@ -106,7 +119,7 @@ void Pmerge::mergelist(int level, std::list<int> &seq)
 	std::advance(b, pairsize-1);
 	int x;
 	for (x =0; x < unit_nbr /2;x++)
-	{	
+	{
 		std::cout<< "unit nbr/2: "<< unit_nbr/2<<" for x: "<<x
 				<< " a: "<<*a<<" b: "<<*b<<std::endl;
 		if (*a < *b)
@@ -118,23 +131,65 @@ void Pmerge::mergelist(int level, std::list<int> &seq)
 		std::advance(b, pairsize*2);
 	}
 	std::cout<<"AF psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<", x ="<<x<<std::endl;
-	printlist(seq, pairsize);
+	printlist(seq, pairsize, unit_nbr);
 	mergelist(level+1, seq);
 
 	a = seq.begin();
 	b = a;
 	std::advance(a, 2*pairsize-1);
 	std::advance(b, pairsize-1);
-	
 
+	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
 	std::list<int>main;
 	std::list<int>pend;
-	main.insert(main.end(), seq.begin(), b);
-	std::cout<<"POST INSERT: "<<std::endl;
-	printlist(main, pairsize);
+	std::list<int>rest;
+	a_end = a;
+	b_end = b;
+	std::advance(a_end, 1);
+	std::advance(b_end, 1);
+	main.insert(main.end(), seq.begin(), a_end);
+	// rest.insert(rest.end(), lasta, seq.end());
+
+	for  (int i =0;i<((unit_nbr-3)/2);i++)
+	{
+		std::advance(b, pairsize*2);
+		std::advance(b_end, pairsize*2);
+		pend.insert(pend.end(), a_end, b_end);
+		std::advance(a, pairsize*2);
+		std::advance(a_end, pairsize*2);
+		main.insert(main.end(), b_end, a_end);
+	}
+	if(a_end != seq.end())
+		rest.insert(rest.end(), a_end, seq.end());
+	if(rest.size()>=(pairsize))
+	{
+		for(int i=0;i<pairsize;i++)
+		{
+			pend.insert(pend.end(), *rest.begin());
+			rest.erase(rest.begin());
+		}
+	}
+
+	if (pairsize==1)
+	{
+		pend.insert(pend.end(),rest.begin(),rest.end());
+		rest.erase(rest.begin(), rest.end());
+	}
+
+	std::cout<<"LEVEL: "<<level<<"impair: "<<impair<<" POST INSERT: psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl << "MAIN: ";
+	printlist(main, pairsize, unit_nbr);
+	std::cout<< "PEND: ";
+	printlist(pend, pairsize, unit_nbr);
+	std::cout<< "rest: ";
+	printlist(rest, pairsize, unit_nbr);std::cout<< "\n ";
+
+	for(int k = 1; k < unit_nbr; k++)
+	{
+
+	}
+
 
 }
-
 
 // void Pmerge::mergelist(int pairsize, std::list<int> &seq)
 // {
