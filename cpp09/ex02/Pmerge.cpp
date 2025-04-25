@@ -27,21 +27,26 @@ void Pmerge::fillseq(std::string input)
 
 void printlist(std::list<int> joe, int size)
 {
-	int x =0;
+	int x =1;
+	bool color=0;
 	std::cout << "------ n:"<<size<<" jacob:"<<_jacobsthal_number(size)<< std::endl;
-	for(std::list<int>::reverse_iterator i=joe.rbegin(); i!=joe.rend();i++)
+	for(std::list<int>::iterator i=joe.begin(); i!=joe.end();i++,x++)
 	{
 
 
-		if (x%size >size/2-1)
+		if (color)
 		{
 			std::cout << "\e[0;33m"<< *i << " "<<"\e[0m";
 		}
-		else if(x%size <=size/2)
+		else 
 			std::cout << "\e[0;32m"<< *i << " "<<"\e[0m";
-		else if(x == joe.size()/2)
-			std::cout << "\e[0;31m"<< *i << " "<<"\e[0m";
-		x++;
+		// else if(x == joe.size()/2)
+		// 	std::cout << "\e[0;31m"<< *i << " "<<"\e[0m";
+		if(x == size)
+		{
+			color = !color;
+			x = 0;
+		}
 	}
 	std::cout << std::endl<< "-----------"<< std::endl;
 }
@@ -77,11 +82,11 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 
 	for(int i=0; i <size;i++)
 	{	
-		if (a == block.rend() || b == block.rend())
+		if (a == block.end() || b == block.end())
 			return 1;
 		std::iter_swap(a,b);
-		std::advance(a, 1);
-		std::advance(b, 1);
+		std::advance(a, -1);
+		std::advance(b, -1);
 	}
 	return 0;
 }
@@ -89,12 +94,44 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 void Pmerge::mergelist(int level, std::list<int> &seq)
 {
 	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
-	bool impair = (unit_nbr %2);
+	bool impair = !(unit_nbr %2);
 	std::list<int>::iterator a, b, last;
+
+	std::cout<<"\nB4 psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl;
+	if (unit_nbr < 2)
+		return ;
+	a = seq.begin();
+	b = a;
+	std::advance(a, 2*pairsize-1);
+	std::advance(b, pairsize-1);
+	int x;
+	for (x =0; x < unit_nbr /2;x++)
+	{	
+		std::cout<< "unit nbr/2: "<< unit_nbr/2<<" for x: "<<x
+				<< " a: "<<*a<<" b: "<<*b<<std::endl;
+		if (*a < *b)
+		{
+			std::cout<<"SWAP a: "<<*a<<" b: "<<*b<<std::endl;
+			swap_pair(seq, b, a, pairsize);
+		}
+		std::advance(a, pairsize*2);
+		std::advance(b, pairsize*2);
+	}
+	std::cout<<"AF psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<", x ="<<x<<std::endl;
+	printlist(seq, pairsize);
+	mergelist(level+1, seq);
 
 	a = seq.begin();
 	b = a;
-	std::advance(b, pow(2,level-1));
+	std::advance(a, 2*pairsize-1);
+	std::advance(b, pairsize-1);
+	
+
+	std::list<int>main;
+	std::list<int>pend;
+	main.insert(main.end(), seq.begin(), b);
+	std::cout<<"POST INSERT: "<<std::endl;
+	printlist(main, pairsize);
 
 }
 
