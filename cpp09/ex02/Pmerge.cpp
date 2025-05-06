@@ -11,13 +11,15 @@ long _jacobsthal_number(long n)
 }
 long next_jack(long n)
 {
+	int prev =0;
 
 	int res=0;
 	for(int i=0;res<n;i++)
 	{
+		prev = res;
 		res = _jacobsthal_number(i);
 	}
-	return(res);
+	return(prev);
 }
 
 void Pmerge::fillseq(std::string input)
@@ -42,7 +44,7 @@ void printlist(std::list<int> joe, int size, int unit_nbr)
 {
 	int x =1;
 	bool color=0;
-	std::cout << "------ n:"<<size<<" jacob:"<<next_jack(unit_nbr)<< std::endl;
+	std::cout <<"ctn len: "<< joe.size() << " n:"<<size<<" jacob:"<<next_jack(joe.size())<< std::endl;
 	for(std::list<int>::iterator i=joe.begin(); i!=joe.end();i++,x++)
 	{
 
