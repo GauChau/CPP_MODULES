@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
+#include <vector>
 
 
 
@@ -39,13 +40,13 @@ void Pmerge::fillseq(std::string input)
 	}
 	this->_n = i;
 }
-
-void printlist(std::list<int> joe, int size, int unit_nbr)
+template <typename T>
+void printlist(T joe, int size, int unit_nbr)
 {
 	int x =1;
 	bool color=0;
 	std::cout <<"ctn len: "<< joe.size() << " n:"<<size<<" jacob:"<<next_jack(joe.size())<< std::endl;
-	for(std::list<int>::iterator i=joe.begin(); i!=joe.end();i++,x++)
+	for(typename T::iterator i=joe.begin(); i!=joe.end();i++,x++)
 	{
 
 
@@ -141,10 +142,11 @@ void Pmerge::mergelist(int level, std::list<int> &seq)
 	std::advance(a, 2*pairsize-1);
 	std::advance(b, pairsize-1);
 
+
+
 	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
-	std::list<int>main;
-	std::list<int>pend;
-	std::list<int>rest;
+	std::vector<int>main, pend, rest;
+	std::list<std::list<int>::iterator> mainI,pendI,restI;
 	a_end = a;
 	b_end = b;
 	std::advance(a_end, 1);
@@ -183,13 +185,23 @@ void Pmerge::mergelist(int level, std::list<int> &seq)
 	std::cout<< "PEND: ";
 	printlist(pend, pairsize, unit_nbr);
 	std::cout<< "rest: ";
-	printlist(rest, pairsize, unit_nbr);std::cout<< "\n ";
+	printlist(rest, pairsize, unit_nbr);std::cout<< "\n";
 
-	for(int k = 1; k < unit_nbr; k++)
+	int jackval = 1, prevjack = 1;
+	for(int k = 1;k < 15; k++, prevjack=jackval, jackval=_jacobsthal_number(k))
 	{
+		std::cout<<"k: "<<k<< " jackval=" << jackval << " prevjack: "<<prevjack<<std::endl;
+		std::vector<int>::iterator insert_point, topush = pend.begin();
+
+		for(int x = 0; x<prevjack-jackval;x++)
+		{
+			insert_point = std::upper_bound(main.begin(), main.end(), *topush);
+			main.insert(insert_point, *topush);
+			std::advance(topush,pairsize*2);
+		}
+
 
 	}
-
 
 }
 

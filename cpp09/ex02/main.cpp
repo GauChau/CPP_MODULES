@@ -36,7 +36,10 @@ int highestPowerof2(int n)
     }
     return res;
 }
-void printlist(std::list<int> joe, int size, int i);
+template <typename T>
+void printlist(T joe, int size, int unit_nbr);
+
+
 int main(int argc, char **argv)
 {
 	if (argc<2)
