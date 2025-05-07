@@ -6,6 +6,13 @@
 
 
 
+template <typename T>
+bool _compare(T lv, T rv)
+{
+	return *lv < *rv;
+}
+
+
 long _jacobsthal_number(long n)
 {
 	return round((pow(2, n + 1) + pow(-1, n)) / 3);
@@ -106,12 +113,12 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 	}
 	return 0;
 }
-
-void Pmerge::mergelist(int level, std::list<int> &seq)
+template <typename T>
+void Pmerge::mergelist(int level, T &seq)
 {
 	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
 	int impair = (unit_nbr %2);
-	std::list<int>::iterator a, b, a_end, b_end;
+	typename T::iterator a, b, a_end, b_end;
 
 	std::cout<<"\nB4 psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl;
 	if (unit_nbr < 2)
@@ -145,26 +152,18 @@ void Pmerge::mergelist(int level, std::list<int> &seq)
 
 
 	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
-	std::vector<int>main, pend, rest;
-	std::list<std::list<int>::iterator> mainI,pendI,restI;
-	a_end = a;
-	b_end = b;
-	std::advance(a_end, 1);
-	std::advance(b_end, 1);
-	main.insert(main.end(), seq.begin(), a_end);
-	// rest.insert(rest.end(), lasta, seq.end());
+	// typename T::iterator main, pend, rest;
+	std::vector<typename T::iterator> main,pend,rest;
+	main.insert(main.end(), b);
+	main.insert(main.end(), a);
 
 	for  (int i =0;i<((unit_nbr-3)/2);i++)
 	{
 		std::advance(b, pairsize*2);
-		std::advance(b_end, pairsize*2);
-		pend.insert(pend.end(), a_end, b_end);
+		pend.insert(pend.end(), b);
 		std::advance(a, pairsize*2);
-		std::advance(a_end, pairsize*2);
-		main.insert(main.end(), b_end, a_end);
+		main.insert(main.end(), a);
 	}
-	if(a_end != seq.end())
-		rest.insert(rest.end(), a_end, seq.end());
 	if(rest.size()>=(pairsize))
 	{
 		for(int i=0;i<pairsize;i++)
@@ -173,38 +172,141 @@ void Pmerge::mergelist(int level, std::list<int> &seq)
 			rest.erase(rest.begin());
 		}
 	}
-
 	if (pairsize==1)
 	{
 		pend.insert(pend.end(),rest.begin(),rest.end());
 		rest.erase(rest.begin(), rest.end());
 	}
 
-	std::cout<<"LEVEL: "<<level<<"impair: "<<impair<<" POST INSERT: psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl << "MAIN: ";
-	printlist(main, pairsize, unit_nbr);
-	std::cout<< "PEND: ";
-	printlist(pend, pairsize, unit_nbr);
-	std::cout<< "rest: ";
-	printlist(rest, pairsize, unit_nbr);std::cout<< "\n";
 
 	int jackval = 1, prevjack = 1;
 	for(int k = 1;k < 15; k++, prevjack=jackval, jackval=_jacobsthal_number(k))
 	{
 		std::cout<<"k: "<<k<< " jackval=" << jackval << " prevjack: "<<prevjack<<std::endl;
-		std::vector<int>::iterator insert_point, topush = pend.begin();
+		std::vector<typename T::iterator> insert_point, topush = pend.begin();
 
 		for(int x = 0; x<prevjack-jackval;x++)
 		{
-			insert_point = std::upper_bound(main.begin(), main.end(), *topush);
+			insert_point = std::upper_bound(main.begin(), main.end(), topush, _compare);
 			main.insert(insert_point, *topush);
-			std::advance(topush,pairsize*2);
+			std::advance(topush,1);
 		}
-
-
 	}
-
+	std::cout<< "MAINV2: ";
+	printlist(main, pairsize, unit_nbr);
+	std::cout<< "PENDV2: ";
+	printlist(pend, pairsize, unit_nbr);
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//V2 V2 V2
+// template <typename T>
+// void Pmerge::mergelist(int level, T &seq)
+// {
+// 	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
+// 	int impair = (unit_nbr %2);
+// 	typename T::iterator a, b, a_end, b_end;
+
+// 	std::cout<<"\nB4 psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl;
+// 	if (unit_nbr < 2)
+// 		return ;
+// 	a = seq.begin();
+// 	b = a;
+// 	std::advance(a, 2*pairsize-1);
+// 	std::advance(b, pairsize-1);
+// 	int x;
+// 	for (x =0; x < unit_nbr /2;x++)
+// 	{
+// 		std::cout<< "unit nbr/2: "<< unit_nbr/2<<" for x: "<<x
+// 				<< " a: "<<*a<<" b: "<<*b<<std::endl;
+// 		if (*a < *b)
+// 		{
+// 			std::cout<<"SWAP a: "<<*a<<" b: "<<*b<<std::endl;
+// 			swap_pair(seq, b, a, pairsize);
+// 		}
+// 		std::advance(a, pairsize*2);
+// 		std::advance(b, pairsize*2);
+// 	}
+// 	std::cout<<"AF psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<", x ="<<x<<std::endl;
+// 	printlist(seq, pairsize, unit_nbr);
+// 	mergelist(level+1, seq);
+
+// 	a = seq.begin();
+// 	b = a;
+// 	std::advance(a, 2*pairsize-1);
+// 	std::advance(b, pairsize-1);
+
+
+
+// 	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
+// 	typename T::iterator main, pend, rest;
+// 	std::vector<typename T::iterator> mainI,pendI,restI;
+// 	a_end = a;
+// 	b_end = b;
+// 	std::advance(a_end, 1);
+// 	std::advance(b_end, 1);
+// 	main.insert(main.end(), seq.begin(), a_end);
+// 	// rest.insert(rest.end(), lasta, seq.end());
+
+// 	for  (int i =0;i<((unit_nbr-3)/2);i++)
+// 	{
+// 		std::advance(b, pairsize*2);
+// 		std::advance(b_end, pairsize*2);
+// 		pend.insert(pend.end(), a_end, b_end);
+// 		std::advance(a, pairsize*2);
+// 		std::advance(a_end, pairsize*2);
+// 		main.insert(main.end(), b_end, a_end);
+// 	}
+// 	if(a_end != seq.end())
+// 		rest.insert(rest.end(), a_end, seq.end());
+// 	if(rest.size()>=(pairsize))
+// 	{
+// 		for(int i=0;i<pairsize;i++)
+// 		{
+// 			pend.insert(pend.end(), *rest.begin());
+// 			rest.erase(rest.begin());
+// 		}
+// 	}
+
+// 	if (pairsize==1)
+// 	{
+// 		pend.insert(pend.end(),rest.begin(),rest.end());
+// 		rest.erase(rest.begin(), rest.end());
+// 	}
+
+// 	std::cout<<"LEVEL: "<<level<<"impair: "<<impair<<" POST INSERT: psize: "<<pairsize<<", unit_nbr: "<<unit_nbr<<std::endl << "MAIN: ";
+// 	printlist(main, pairsize, unit_nbr);
+// 	std::cout<< "PEND: ";
+// 	printlist(pend, pairsize, unit_nbr);
+// 	std::cout<< "rest: ";
+// 	printlist(rest, pairsize, unit_nbr);std::cout<< "\n";
+
+// 	int jackval = 1, prevjack = 1;
+// 	for(int k = 1;k < 15; k++, prevjack=jackval, jackval=_jacobsthal_number(k))
+// 	{
+// 		std::cout<<"k: "<<k<< " jackval=" << jackval << " prevjack: "<<prevjack<<std::endl;
+// 		std::vector<int>::iterator insert_point, topush = pend.begin();
+
+// 		for(int x = 0; x<prevjack-jackval;x++)
+// 		{
+// 			insert_point = std::upper_bound(main.begin(), main.end(), *topush);
+// 			main.insert(insert_point, *topush);
+// 			std::advance(topush,pairsize*2);
+// 		}
+
+
+// 	}
+
+// }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// V1
 // void Pmerge::mergelist(int pairsize, std::list<int> &seq)
 // {
 // 	// std::cout <<"mergelistse123q, pairsize: "<< pairsize<< std::endl;

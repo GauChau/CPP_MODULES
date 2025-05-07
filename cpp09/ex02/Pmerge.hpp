@@ -18,6 +18,7 @@
 #include <filesystem>
 #include <cmath>
 
+
 class Pmerge
 {
 	public:
@@ -25,22 +26,22 @@ class Pmerge
 		Pmerge();
 		Pmerge(const Pmerge &copy);
 		Pmerge(std::pair<int,int> merge);
-		
+
 		// Destructor
 		~Pmerge();
-		
+
 		// Operators
 		Pmerge & operator=(const Pmerge &assign);
-		
+
 		// Getters / Setters
 		std::pair<int,int> getMerge() const;
 
 		// Members
 		void	fillseq(std::string);
-		void	mergelist(int npairmax, std::list<int>&);
+		template <typename T> void	mergelist(int npairmax, T&);
 		void	sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list<int>::iterator &pend);
 
-		
+
 		// Exceptions
 		class BadInput : public std::exception {
 			virtual const char* what() const throw();
@@ -51,7 +52,7 @@ class Pmerge
 		std::pair<int,int> _merge;
 		std::vector<int> _vectored;
 		int _n;
-		
+
 };
 
 #endif
