@@ -38,7 +38,7 @@ int highestPowerof2(int n)
 }
 template <typename T>
 void printlist(T joe, int size, int unit_nbr);
-cd
+
 int main(int argc, char **argv)
 {
 	if (argc<2)
@@ -58,3 +58,4 @@ int main(int argc, char **argv)
 
 	return 0;
 }
+//2 11 0 17 6 15 8 16 3 10 1 21 9 18 14 19 5 12 4 20 7 13
