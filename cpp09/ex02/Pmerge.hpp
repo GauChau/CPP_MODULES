@@ -57,25 +57,25 @@ class Pmerge
 long next_jack(long n);
 long _jacobsthal_number(long n);
 
-template <typename T>
-struct DerefCompare
-{
-	bool operator()(const T& lv, const T& rv) const
-	{
-		return *lv < *rv;
-	}
-};
+// template <typename T>
+// struct DerefCompare
+// {
+// 	bool operator()(const T& lv, const T& rv) const
+// 	{
+// 		return *lv < *rv;
+// 	}
+// };
 
 template <typename T>
 bool _compare(T lv, T rv)
 {
 	return *lv < *rv;
 }
-bool _compare2 (int x, int y);
+// bool _compare2 (int x, int y);
 
-template <typename T> bool _comp(T &lv, T &rv) {
-	return *lv < *rv;
-}
+// template <typename T> bool _comp(T &lv, T &rv) {
+// 	return *lv < *rv;
+// }
 
 template <typename T>
 void printlist(T joe, int size, int unit_nbr)
@@ -218,25 +218,7 @@ void Pmerge::mergelist(int level, T &seq)
 		rest.insert(rest.end(), a);
 	}
 
-	int jackval = 1, prevjack = 1;
-	for(int k = 1;k < 15; k++, prevjack=jackval, jackval=_jacobsthal_number(k))
-	{
-		std::cout<<"k: "<<k<< " jackval=" << jackval << " prevjack: "<<prevjack<<std::endl;
-		typename std::vector<typename T::iterator>::iterator insert_point, topush = pend.begin();
-
-		// for(int x = 0; x<prevjack-jackval;x++)
-		// {
-			if(topush!=pend.end())
-				// insert_point =
-				// std::upper_bound(main.begin(), main.end(), topush, _compare);
-					 std::upper_bound(seq.begin(), seq.end(), 7,DerefCompare< typename std::vector<typename T::iterator>::iterator>());
-				// std::cout<< "comp"<<x<<": " <<_compare(*topush, *main.begin())<<"\n";
-				// std::cout<<**main.begin()<< "comp"<<k<<": " <<**topush<<"\n";
-			// main.insert(insert_point, *topush);
-			// std::advance(topush,1);
-		// }
-	}
-	std::cout<< "seq: ";
+		std::cout<< "BEFOREseq: ";
 	printlist(seq, pairsize, unit_nbr);
 	std::cout<< "MAINV1: ";
 	print_iter_list(main, pairsize, unit_nbr);
@@ -244,6 +226,54 @@ void Pmerge::mergelist(int level, T &seq)
 	print_iter_list(pend, pairsize, unit_nbr);
 	std::cout<< "restV1: ";
 	print_iter_list(rest, pairsize, unit_nbr);
+	std::cout<< "---------------\n";
+	int jackval = 1, prevjack = 1;
+	for(int k = 1;jackval <= main.size(); k++, prevjack=jackval, jackval=_jacobsthal_number(k))
+	{
+		std::cout<<"k: "<<k<< " jackval=" << jackval << " prevjack: "<<prevjack<<std::endl;
+		typename std::vector<typename T::iterator>::iterator insert_point, topush = pend.begin();
+
+		std::advance(topush,jackval -1);
+		for(int y = jackval; y > prevjack; y--)
+		{
+			std::cout<<" y:"<<y;
+			if(topush!=pend.end())
+			{
+				insert_point =
+				std::upper_bound(main.begin(), main.end(), *topush, _compare<typename T::iterator>);
+				// std::cout<< "comp"<<x<<": " <<_compare(*topush, *main.begin())<<"\n";
+				// std::cout<<**main.begin()<< "comp"<<k<<": " <<**topush<<"\n";
+				main.insert(insert_point, *topush);
+				if (topush==pend.begin())
+					break ;
+				std::advance(topush,-1);
+			}
+
+		}
+		std::cout<<"\n";
+	}
+
+	std::vector<int> result;
+	for(typename std::vector<typename T::iterator>::iterator i=main.begin(); i!=main.end();std::advance(i,1))
+	{
+		for(int x=0; x<pairsize;x++, std::advance(*i,-1))
+		{
+			// std::cout<< "Aasdasdasdsadeq: ";
+				result.push_back(**i);
+		}
+
+	}
+	// result.
+	std::cout<< "AFTER ---- seq: ";
+	printlist(seq, pairsize, unit_nbr);
+	std::cout<< "MAINV1: ";
+	print_iter_list(main, pairsize, unit_nbr);
+	std::cout<< "PENDV1: ";
+	print_iter_list(pend, pairsize, unit_nbr);
+	std::cout<< "restV1: ";
+	print_iter_list(rest, pairsize, unit_nbr);
+		std::cout<< "restV1: ";
+	printlist(result, pairsize, unit_nbr);
 	std::cout<< "---------------\n";
 }
 
