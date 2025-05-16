@@ -57,11 +57,23 @@ class Pmerge
 long next_jack(long n);
 long _jacobsthal_number(long n);
 
-
+template <typename T>
+struct DerefCompare
+{
+	bool operator()(const T& lv, const T& rv) const
+	{
+		return *lv < *rv;
+	}
+};
 
 template <typename T>
 bool _compare(T lv, T rv)
 {
+	return *lv < *rv;
+}
+bool _compare2 (int x, int y);
+
+template <typename T> bool _comp(T &lv, T &rv) {
 	return *lv < *rv;
 }
 
@@ -184,7 +196,7 @@ void Pmerge::mergelist(int level, T &seq)
 
 	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
 	// typename T::iterator main, pend, rest;
-	std::vector<typename T::iterator> main, pend, rest;
+	typename std::vector<typename T::iterator> main, pend, rest;
 	main.insert(main.end(), b);
 	main.insert(main.end(), a);
 
@@ -215,7 +227,9 @@ void Pmerge::mergelist(int level, T &seq)
 		// for(int x = 0; x<prevjack-jackval;x++)
 		// {
 			if(topush!=pend.end())
-				insert_point = std::upper_bound(main.begin(), main.end(), topush, _compare);
+				// insert_point =
+				// std::upper_bound(main.begin(), main.end(), topush, _compare);
+					 std::upper_bound(seq.begin(), seq.end(), 7,DerefCompare< typename std::vector<typename T::iterator>::iterator>());
 				// std::cout<< "comp"<<x<<": " <<_compare(*topush, *main.begin())<<"\n";
 				// std::cout<<**main.begin()<< "comp"<<k<<": " <<**topush<<"\n";
 			// main.insert(insert_point, *topush);

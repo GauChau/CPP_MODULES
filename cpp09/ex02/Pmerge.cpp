@@ -14,6 +14,8 @@
 
 
 
+bool _compare2 (int x, int y) { return x < y; };
+
 
 long _jacobsthal_number(long n)
 {
