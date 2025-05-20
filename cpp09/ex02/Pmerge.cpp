@@ -34,23 +34,23 @@ long next_jack(long n)
 	return(prev);
 }
 
-void Pmerge::fillseq(std::string input)
-{
-	std::cout <<"fillseq"<< std::endl;
-	std::stringstream s_input(input);
-	std::string buffer;
-	int x, i = 0;
-	this->_listed = new std::list<int>;
+// void Pmerge::fillseq(std::string input)
+// {
+// 	std::cout <<"fillseq"<< std::endl;
+// 	std::stringstream s_input(input);
+// 	std::string buffer;
+// 	int x, i = 0;
+// 	this->_listed = new T;
 
-	while (std::getline(s_input, buffer, ' '))
-	{
-		x = std::atoi(buffer.c_str());
-		this->_listed->push_back(x);
-		this->_vectored.push_back(x);
-		i++;
-	}
-	this->_n = i;
-}
+// 	while (std::getline(s_input, buffer, ' '))
+// 	{
+// 		x = std::atoi(buffer.c_str());
+// 		this->_listed->push_back(x);
+// 		this->_vectored.push_back(x);
+// 		i++;
+// 	}
+// 	this->_n = i;
+// }
 // template <typename T>
 // void printlist(T joe, int size, int unit_nbr)
 // {

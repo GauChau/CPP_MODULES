@@ -37,8 +37,8 @@ class Pmerge
 		std::pair<int,int> getMerge() const;
 
 		// Members
-		template <typename T>void	fillseq(std::string);
-		template <typename T, typename U> void	mergelist(int npairmax, T&);
+		void	fillseq(std::string);
+		template <typename T> void	mergelist(int npairmax, T&);
 		void	sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list<int>::iterator &pend);
 
 
@@ -46,7 +46,7 @@ class Pmerge
 		class BadInput : public std::exception {
 			virtual const char* what() const throw();
 		};
-		std::vector<int> *_listed;
+		std::list<int> *_listed;
 
 	private:
 		std::pair<int,int> _merge;
@@ -65,25 +65,6 @@ long _jacobsthal_number(long n);
 // 		return *lv < *rv;
 // 	}
 // };
-
-template <typename T>
-void Pmerge::fillseq(std::string input)
-{
-	std::cout <<"fillseq"<< std::endl;
-	std::stringstream s_input(input);
-	std::string buffer;
-	int x, i = 0;
-	this->_listed = new *std::vector<int>;
-
-	while (std::getline(s_input, buffer, ' '))
-	{
-		x = std::atoi(buffer.c_str());
-		this->_listed->push_back(x);
-		this->_vectored.push_back(x);
-		i++;
-	}
-	this->_n = i;
-}
 
 template <typename T>
 bool _compare(T lv, T rv)
@@ -175,9 +156,6 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 	return 0;
 }
 
-
-
-
 template <typename T>
 void insertblock(int pairsize, typename T::iterator iter, T &seq)
 {
@@ -199,7 +177,7 @@ void insertblock(int pairsize, typename T::iterator iter, T &seq)
 	// std::cout<<"  iter: " << *iter<< "\n";
 }
 
-template <typename T, typename U>
+template <typename T>
 void Pmerge::mergelist(int level, T &seq)
 {
 	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
@@ -227,7 +205,7 @@ void Pmerge::mergelist(int level, T &seq)
 	std::advance(b, pairsize-1);
 	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
 	// typename T::iterator main, pend, rest;
-	U main, pend, rest;
+	typename std::vector<typename T::iterator> main, pend, rest;
 	main.insert(main.end(), b);
 	main.insert(main.end(), a);
 
@@ -251,7 +229,7 @@ void Pmerge::mergelist(int level, T &seq)
 	int jackval = 1, prevjack = 1;
 	for(int k = 1, x = 0;x<pend.size(); k++, prevjack=jackval, jackval=_jacobsthal_number(k))
 	{
-		typename U::iterator insert_point, topush = pend.begin();
+		typename std::vector<typename T::iterator>::iterator insert_point, topush = pend.begin();
 
 		for(int y = jackval; y > prevjack; y-=1)
 		{
@@ -273,7 +251,7 @@ void Pmerge::mergelist(int level, T &seq)
 			}
 		}
 	}
-	typename U::iterator insert_point = main.begin();
+	typename std::vector<typename T::iterator>::iterator insert_point = main.begin();
 	T result;
 	for(int y =0;y<unit_nbr; y++)
 	{

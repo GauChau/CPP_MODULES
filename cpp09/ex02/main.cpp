@@ -36,7 +36,7 @@ int highestPowerof2(int n)
     }
     return res;
 }
-template <typename T>
+template <typename T, typename U>
 void printlist(T joe, int size, int unit_nbr);
 
 int main(int argc, char **argv)
@@ -49,12 +49,17 @@ int main(int argc, char **argv)
 
 
 	Pmerge *joe= new(Pmerge);
+	Pmerge *test= new(Pmerge);
 
 	joe->fillseq(sequence);
+	test->fillseq(sequence);
+	// test->_listed->sort();
 	std::cout <<"fillseq size: "<< sequence.size()<< std::endl;
 
 	joe->mergelist(1, *joe->_listed);
 	printlist(*joe->_listed,joe->_listed->size(), 1);
+	std::cout<<"test: "<<std::endl;
+	printlist(*test->_listed,test->_listed->size(), 1);
 
 	return 0;
 }
