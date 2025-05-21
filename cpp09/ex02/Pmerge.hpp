@@ -17,7 +17,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <cmath>
-
+#include <deque>
 
 class Pmerge
 {
@@ -25,145 +25,43 @@ class Pmerge
 		// Constructors
 		Pmerge();
 		Pmerge(const Pmerge &copy);
-		Pmerge(std::pair<int,int> merge);
-
 		// Destructor
 		~Pmerge();
 
 		// Operators
 		Pmerge & operator=(const Pmerge &assign);
 
-		// Getters / Setters
-		std::pair<int,int> getMerge() const;
-
 		// Members
-		template <typename T>void	fillseq(std::string);
-		template <typename T, typename U> void	mergelist(int npairmax, T&);
-		void	sortmlist(int pairsize, std::list<int>::iterator &pstart, std::list<int>::iterator &pend);
-
+		void	fillseq(std::string);
+		void	mergelist_vector(int level, std::vector<int> &seq);
+		void	mergelist_deque(int level, std::deque<int> &seq);
+		template <typename T> void issorted(T joe);
 
 		// Exceptions
 		class BadInput : public std::exception {
 			virtual const char* what() const throw();
 		};
-		std::vector<int> *_listed;
+		class SortingFailed : public std::exception {
+			virtual const char* what() const throw();
+		};
+
+		std::vector<int> _vectored;
+		std::deque<int> _dequed;
 
 	private:
-		std::pair<int,int> _merge;
-		std::vector<int> _vectored;
 		int _n;
 
 };
-long next_jack(long n);
-long _jacobsthal_number(long n);
-
-// template <typename T>
-// struct DerefCompare
-// {
-// 	bool operator()(const T& lv, const T& rv) const
-// 	{
-// 		return *lv < *rv;
-// 	}
-// };
-
-template <typename T>
-void Pmerge::fillseq(std::string input)
-{
-	std::cout <<"fillseq"<< std::endl;
-	std::stringstream s_input(input);
-	std::string buffer;
-	int x, i = 0;
-	this->_listed = new *std::vector<int>;
-
-	while (std::getline(s_input, buffer, ' '))
-	{
-		x = std::atoi(buffer.c_str());
-		this->_listed->push_back(x);
-		this->_vectored.push_back(x);
-		i++;
-	}
-	this->_n = i;
-}
 
 template <typename T>
 bool _compare(T lv, T rv)
 {
 	return *lv < *rv;
 }
-// bool _compare2 (int x, int y);
-
-// template <typename T> bool _comp(T &lv, T &rv) {
-// 	return *lv < *rv;
-// }
-
-template <typename T>
-void printlist(T joe, int size, int unit_nbr)
-{
-	int x =1;
-	bool color=0;
-	unit_nbr++;
-	std::cout <<"ctn len: "<< joe.size() << " n:"<<size<< std::endl;
-	for(typename T::iterator i=joe.begin(); i!=joe.end();i++,x++)
-	{
-
-
-		if (color)
-		{
-			std::cout << "\e[0;33m";
-			std::cout << *i;
-			std::cout << " "<<"\e[0m";
-		}
-		else
-		{
-			std::cout << "\e[0;32m";
-			std::cout << *i;
-			std::cout << " "<<"\e[0m";
-		}
-		if(x == size)
-		{
-			color = !color;
-			x = 0;
-		}
-	}
-	std::cout << std::endl;
-}
-
-template <typename T>
-void print_iter_list(T joe, int size, int unit_nbr)
-{
-	int x =1;
-	bool color=0;
-	unit_nbr++;
-	std::cout <<"ctn len: "<< joe.size() << " n:"<<size<< " unitnbr: "<<unit_nbr-1<< std::endl;
-	for(typename T::iterator i=joe.begin(); i!=joe.end();i++,x++)
-	{
-
-
-		if (color)
-		{
-			std::cout << "\e[0;33m";
-			std::cout << **i;
-			std::cout << " "<<"\e[0m";
-		}
-		else
-		{
-			std::cout << "\e[0;32m";
-			std::cout << **i;
-			std::cout << " "<<"\e[0m";
-		}
-		if(x == size)
-		{
-			color = !color;
-			x = 0;
-		}
-	}
-	std::cout << std::endl;
-}
 
 template <typename T>
 int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 {
-
 	for(int i=0; i <size;i++)
 	{
 		if (a == block.end() || b == block.end())
@@ -175,141 +73,42 @@ int swap_pair(T block, typename T::iterator a, typename T::iterator b, int size)
 	return 0;
 }
 
-
-
-
 template <typename T>
 void insertblock(int pairsize, typename T::iterator iter, T &seq)
 {
 	typename T::iterator block_begin = iter;
 
-	for (int x=0; block_begin != seq.begin(), x<pairsize-1; std::advance(block_begin, -1),x++)
-	{
-		// std::cout<< x<<" iter: " << *iter<< "bbeg: "<< *block_begin<<"\n";
-	}
-	
-	// std::advance(block_begin, (-1 * (pairsize-1)));
+	for (int x=0; (block_begin != seq.begin()) && (x<pairsize-1); std::advance(block_begin, -1),x++){}
 	for(;block_begin != iter; std::advance(block_begin, 1))
-	{
-		// std::cout<<"bbegin: "<< *block_begin<<"\n";
-		seq.insert(seq.end(), *block_begin);
-	}
-		seq.insert(seq.end(), *block_begin);
-
-	// std::cout<<"  iter: " << *iter<< "\n";
+		{seq.insert(seq.end(), *block_begin);}
+	seq.insert(seq.end(), *block_begin);
 }
 
-template <typename T, typename U>
-void Pmerge::mergelist(int level, T &seq)
+template <typename T>
+void printcontainer(T ctn)
 {
-	int pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
-	int impair = (unit_nbr %2);
-	typename T::iterator a, b, a_end, b_end;
+	for(typename T::iterator i=ctn.begin(); i!=ctn.end();i++)
+	{
+			std::cout << *i<<" ";
+	}
+	std::cout << std::endl;
+}
 
-	if (unit_nbr < 2)
-		return ;
-	a = seq.begin();
-	b = a;
-	std::advance(a, 2*pairsize-1);
-	std::advance(b, pairsize-1);
-	int x;
-	for (x =0; x < unit_nbr /2;x++)
+template <typename T>
+void Pmerge::issorted(T joe)
+{
+	for(typename T::iterator i=joe.begin(), y; i!=joe.end();i++)
 	{
-		if (*a < *b)
-			swap_pair(seq, b, a, pairsize);
-		std::advance(a, pairsize*2);
-		std::advance(b, pairsize*2);
-	}
-	mergelist(level+1, seq);
-	a = seq.begin();
-	b = a;
-	std::advance(a, 2*pairsize-1);
-	std::advance(b, pairsize-1);
-	//aend and bend are like a.end() they are the * after the value to determine end., so the element a is in the range b_end..a,
-	// typename T::iterator main, pend, rest;
-	U main, pend, rest;
-	main.insert(main.end(), b);
-	main.insert(main.end(), a);
-
-	for (int i =0;i<((unit_nbr-2)/2);i++)
-	{
-		std::advance(b, pairsize*2);
-		pend.insert(pend.end(), b);
-		std::advance(a, pairsize*2);
-		main.insert(main.end(), a);
-	}
-	if(impair)
-	{
-		std::advance(b, pairsize*2);
-		pend.insert(pend.end(), b);
-		a = b;
-	}
-	for (std::advance(a, 1);a!=seq.end();std::advance(a, 1))
-	{
-		rest.insert(rest.end(), a);
-	}
-	int jackval = 1, prevjack = 1;
-	for(int k = 1, x = 0;x<pend.size(); k++, prevjack=jackval, jackval=_jacobsthal_number(k))
-	{
-		typename U::iterator insert_point, topush = pend.begin();
-
-		for(int y = jackval; y > prevjack; y-=1)
+		y = i+1;
+		if (y == joe.end())
 		{
-			topush = pend.begin();
-			if (y-2<pend.size())
-				std::advance(topush, y-2);
-			else
-			{
-				topush = pend.end();
-				std::advance(topush, -(pend.size()-x));
-			}
-			if (topush!=pend.end())
-			{
-				insert_point = std::upper_bound(main.begin(), main.end(), *topush, _compare<typename T::iterator>);
-				main.insert(insert_point, *topush);
-				x++;
-				if (topush==pend.begin() || x>=pend.size())
-					break ;
-			}
+			std::cout<< "\e[0;32mSUCCESS\e[0m" << std::endl;;
+			return ;
 		}
+		if (*i > *y)
+			throw Pmerge::SortingFailed();
 	}
-	typename U::iterator insert_point = main.begin();
-	T result;
-	for(int y =0;y<unit_nbr; y++)
-	{
-		if(insert_point==main.end())
-			break;
-		// std::cout<<"je push: " <<**insert_point<<"\n";
-		insertblock(pairsize,*insert_point,result);
-		std::advance(insert_point, 1);
-
-	}
-	insert_point=rest.begin();
-	for(;rest.size()>0;)
-	{
-		if(insert_point==rest.end())
-			break;
-		result.insert(result.end(),**insert_point);
-		// std::cout<<"je pushde rest: " <<**insert_point<<"\n";
-		std::advance(insert_point, 1);
-
-	}
-	// seq.clear();
-	seq.clear();
-	seq = result;
-	// result.clear();
-	// result.
-	// std::cout<< "AFTER ---- seq: ";
-	// printlist(seq, pairsize, unit_nbr);
-	// std::cout<< "MAIN222: ";
-	// print_iter_list(main, pairsize, unit_nbr);
-	// std::cout<< "PENDV222: ";
-	// print_iter_list(pend, pairsize, unit_nbr);
-	// std::cout<< "restV222: ";
-	// print_iter_list(rest, pairsize, unit_nbr);
-	// std::cout<< "resULTtV222: ";
-	// printlist(result, pairsize, unit_nbr);
-	// std::cout<< "---------------next--------------\n";
+	std::cout << std::endl;
 }
 
 #endif
