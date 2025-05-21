@@ -1,4 +1,4 @@
-OUT = ex02
+OUT = Pmerge
 
 SRC = main.cpp Pmerge.cpp
 SRC_OBJS = $(SRC:.cpp=.o)

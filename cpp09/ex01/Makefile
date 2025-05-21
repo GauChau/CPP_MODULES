@@ -1,4 +1,4 @@
-OUT = ex01
+OUT = RNP
 
 SRC = main.cpp RNP.cpp
 SRC_OBJS = $(SRC:.cpp=.o)

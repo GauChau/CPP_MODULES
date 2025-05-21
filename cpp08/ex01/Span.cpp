@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
+/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:28:32 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/04/01 14:12:15 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/05/21 17:34:45 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterato
 
 int Span::shortestSpan(void)
 {
-
 	if (this->array.size() < 2)
 		throw NotEnough();
 	std::sort(this->array.begin(),this->array.end());
 	std::vector<int> result(this->array.size());
 
-	std::vector<int>::iterator InBegin = this->array.begin();
-	std::vector<int>::iterator InLast = this->array.end();
-	std::vector<int>::iterator OuBegin = result.begin();
-	std::vector<int>::iterator OuEnd = result.begin();
+	std::vector<int>::iterator
+		InBegin = this->array.begin(),
+		InLast = this->array.end(),
+		OuBegin = result.begin(),
+		OuEnd = result.begin();
 
 	// *OuBegin = *InBegin;
 	InBegin++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
+/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:06:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/04/05 01:42:17 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/05/21 17:46:31 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,54 @@ int main()
 	A.push_back(9);
 	A.push_back(11);
 
-	try
-	{
+	try{
 		{
+			std::cout<<"No numbers:";
 			Span dpan(50);
-			// dpan.addNumber(A.begin(), A.end());
-			// dpan.addNumber(90);
-			dpan.addNumber(190);
-			dpan.addNumber(191);
-			dpan.addNumber(90);
-			std::cout << dpan.shortestSpan()<<std::endl;
-			std::cout << dpan.longestSpan()<<std::endl;
+			std::cout << "shortest: "<< dpan.shortestSpan()
+				<< " longest: "<< dpan.longestSpan()<<std::endl;
 		}
+	}
+	catch(const std::exception& e){std::cerr << e.what() << '\n';}
 
+	try{
+
+		{
+			std::cout<<"One number:";
+			Span dpan(50);
+			dpan.addNumber(90);
+			std::cout << "shortest: "<< dpan.shortestSpan()
+				<< " longest: "<< dpan.longestSpan()<<std::endl;
+		}
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
+	catch(const std::exception& e){std::cerr << e.what() << '\n';}
+
+	try{
+		{
+			std::cout<<"\nseveral number:\n";
+			Span dpan(50);
+			dpan.addNumber(90);
+			dpan.addNumber(190);
+			dpan.addNumber(1090);
+			dpan.addNumber(9);
+			dpan.addNumber(2);
+			std::cout << "shortest: "<< dpan.shortestSpan()
+				<< " longest: "<< dpan.longestSpan()<<std::endl;
+			std::cout<<"\n";
+		}
 	}
+	catch(const std::exception& e){std::cerr << e.what() << '\n';}
+
+	try{
+		{
+			std::cout<<"add range number:\n";
+			Span dpan(50);
+			dpan.addNumber(A.begin(), A.end());
+			std::cout << "shortest: "<< dpan.shortestSpan()
+				<< " longest: "<< dpan.longestSpan()<<std::endl;
+		}
+	}
+	catch(const std::exception& e){std::cerr << e.what() << '\n';}
 
 
 	return 0;

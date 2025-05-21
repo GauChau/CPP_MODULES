@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:58:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/27 12:26:18 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:55:48 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class Array
 		~Array();
 
 		unsigned int size(void);
+
 	private :
 		T	*array;
 		unsigned int len;

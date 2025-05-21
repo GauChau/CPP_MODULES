@@ -1,6 +1,6 @@
 OUT = ex02
 
-SRC = main.cpp MutantStack.cpp
+SRC = main.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
 OBJ_FOLDER = obj
 OBJ_FOLDED = $(addprefix $(OBJ_FOLDER)/, $(SRC_OBJS))

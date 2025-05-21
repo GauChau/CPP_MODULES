@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:21:42 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/31 14:53:00 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:58:06 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,18 @@
 template <typename T>
 Array<T>::Array(void): len(0)
 {
-	std::cout << "\e[0;33mDefault Constructor called of Array\e[0m" << std::endl;
 	this->array =NULL;
 }
 
 template <typename T>
 Array<T>::Array(unsigned int n) : len(n)
 {
-	std::cout << "\e[0;33mLen Constructor called of Array\e[0m" << std::endl;
 	this->array = new T[n];
 }
 
 template <typename T>
 Array<T>::Array(Array &copy)
 {
-	std::cout << "\e[0;33mCopy Constructor called of Array\e[0m" << std::endl;
 	this->array = NULL;
 	*this = copy;
 }
