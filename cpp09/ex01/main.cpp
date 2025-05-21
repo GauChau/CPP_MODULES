@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:03:07 by gautierchau       #+#    #+#             */
-/*   Updated: 2025/05/21 14:08:07 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:28:18 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 
 int main(int argc, char **argv)
 {
-	(void)argc;
+	if(argc !=2)
+	{
+		std::cout<<"wrong number of arguments. Only one arg: \"1 2 +\" for example.\n";
+		return 0;
+	}
 	std::string test = argv[1];
 	RNP tost(test);
 	try

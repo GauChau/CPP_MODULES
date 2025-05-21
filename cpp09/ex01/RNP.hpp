@@ -31,6 +31,9 @@ class RNP
 		class BadSyntax : public std::exception {
 			virtual const char* what() const throw();
 		};
+		class test1 : public std::exception {
+			virtual const char* what() const throw();
+		};
 
 		//Members
 		void Compute(void);

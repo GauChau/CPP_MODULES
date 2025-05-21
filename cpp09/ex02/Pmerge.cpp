@@ -123,7 +123,6 @@ void Pmerge::mergelist_vector(int level, std::vector<int> &seq)
 		rest.insert(rest.end(), a);
 	}
 
-
 	////////////////////////////////////////////////////////////
 	//INSERTION DU PEND DANS MAIN SUIVANT LA SUITE DE JACOBSTHAL
 	////////////////////////////////////////////////////////////

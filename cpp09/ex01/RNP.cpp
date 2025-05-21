@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RNP.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautierchauvot <gautierchauvot@student.    +#+  +:+       +#+        */
+/*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 19:33:03 by gautierchau       #+#    #+#             */
-/*   Updated: 2025/04/14 23:21:18 by gautierchau      ###   ########.fr       */
+/*   Updated: 2025/05/21 16:38:57 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ RNP & RNP::operator=(const RNP &assign)
 
 void RNP::Calculate(std::string oper)
 {
-	if (this->_pile.size() != 2)
+	if (this->_pile.size() < 2)
 		throw BadSyntax();
 	float b = this->_pile.top();
 	this->_pile.pop();
@@ -115,7 +115,7 @@ void RNP::Compute()
 		if (buffer.length()==0)
 			continue ;
 		if((atof(buffer.c_str()) == 0 && !isstrdigit(buffer) && buffer != "-0" && !operatordetect(buffer))
-			|| this->_pile.size() > 2
+			//|| this->_pile.size() > 2
 			|| strisfloatable(buffer)<0 )
 				throw BadSyntax();
 		else if(operatordetect(buffer))
@@ -132,4 +132,9 @@ void RNP::Compute()
 const char * RNP::BadSyntax::what() const throw()
 {
 	return "RPN Error: Bad syntax";
+}
+
+const char * RNP::test1::what() const throw()
+{
+	return "RPN Error: TEST1";
 }
