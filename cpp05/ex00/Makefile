@@ -2,19 +2,24 @@ OUT = ex00
 
 SRC = Bureaucrat.cpp main.cpp
 SRC_OBJS = $(SRC:.cpp=.o)
+OBJ_FOLDER = obj
+OBJ_FOLDED = $(addprefix $(OBJ_FOLDER)/, $(SRC_OBJS))
 FLAGS = -Wall -Wextra -Werror -g -std=c++98
 CPP = c++
 
 all: $(OUT)
 
-$(OUT): $(SRC_OBJS)
-	$(CPP) $(FLAGS) $(SRC_OBJS) -o $(OUT)
+$(OBJ_FOLDER):
+	mkdir -p $(OBJ_FOLDER)
 
-$(SRC_OBJS): %.o: %.cpp
+$(OUT): $(OBJ_FOLDED)
+	$(CPP) $(FLAGS) $(OBJ_FOLDED) -o $(OUT)
+
+$(OBJ_FOLDER)/%.o: %.cpp | $(OBJ_FOLDER)
 	$(CPP) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(SRC_OBJS)
+	rm -f $(OBJ_FOLDED)
 
 fclean: clean
 	rm -f $(OUT)

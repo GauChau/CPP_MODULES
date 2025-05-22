@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 12:06:14 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/31 15:15:14 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:46:37 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int main( void )
 		std::cout << arr[i] << " ";  // Output: 11 12 13 14 15
 	}
 	std::cout << std::endl;
-return 0;
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: gchauvot <gchauvot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:03:04 by gchauvot          #+#    #+#             */
-/*   Updated: 2025/03/13 16:47:15 by gchauvot         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:22:51 by gchauvot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int main (void)
 	try
 	{
 		Intern jean;
-        Bureaucrat Xavier("M. NIEL-ARNAUD", 125);
+        Bureaucrat Xavier("M. NIEL-ARNAUD", 1);
 		std::string formname = "PreSidentIal PARdOn";
 
 
@@ -91,7 +91,7 @@ int main (void)
         Xavier.signAForm(*form2);
         Xavier.executeForm(*form2);
         std::cout << *form2<<std::endl;
-        if(form2)
+        if (form2)
             delete form2;
 	}
 
