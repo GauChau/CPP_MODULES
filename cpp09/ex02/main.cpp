@@ -52,26 +52,26 @@ int main(int argc, char **argv)
 		joe->fillseq(sequence);
 
 		clock_t start_v = clock(), end_v;
-		joe->mergelist_vector(1, joe->_vectored);
+		joe->mergelist_vector(1, joe->Get_vectored());
 		end_v = clock();
 		double time_elapsed_v = static_cast<double>(end_v - start_v) / CLOCKS_PER_SEC;
 
 		clock_t start_d = clock(), end_d;
-		joe->mergelist_deque(1, joe->_dequed);
+		joe->mergelist_deque(1, joe->Get_dequed());
 		end_d = clock();
 		double time_elapsed_d = static_cast<double>(end_d - start_d) / CLOCKS_PER_SEC;
 
 		std::cout<<"\e[0;36mVECTOR CONTAINER RESULT: ";
-		joe->issorted(joe->_vectored);
+		joe->issorted(joe->Get_vectored());
 		std::cout<<"\e[0;33m";
-		printcontainer(joe->_vectored);
+		printcontainer(joe->Get_vectored());
 		std::cout<<"\e[0;37mVector container sorted in: \e[0;35m"<< time_elapsed_v * 1000<<"ms";
 		std::cout<<"\e[0m\n" << std::endl;
 
 		std::cout<<"\e[0;36mDEQUE CONTAINER RESULT: ";
-		joe->issorted(joe->_dequed);
+		joe->issorted(joe->Get_dequed());
 		std::cout<<"\e[0;32m";
-		printcontainer(joe->_dequed);
+		printcontainer(joe->Get_dequed());
 		std::cout<<"\e[0;37mDeque container sorted in: \e[0;35m"<< time_elapsed_d * 1000<<"ms";
 		std::cout<<"\e[0m\n" << std::endl;
 	}

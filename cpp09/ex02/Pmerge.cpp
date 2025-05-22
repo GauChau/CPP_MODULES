@@ -65,6 +65,15 @@ void Pmerge::fillseq(std::string input)
 	this->_n = i;
 }
 
+std::vector<int>& Pmerge::Get_vectored(void)
+{
+	return(this->_vectored);
+}
+std::deque<int>& Pmerge::Get_dequed(void)
+{
+	return(this->_dequed);
+}
+
 void Pmerge::mergelist_vector(int level, std::vector<int> &seq)
 {
 	size_t pairsize = pow(2,level-1), unit_nbr = seq.size() / pairsize;
@@ -163,7 +172,6 @@ void Pmerge::mergelist_vector(int level, std::vector<int> &seq)
 			break;
 		insertblock(pairsize,*insert_point,result);
 		std::advance(insert_point, 1);
-
 	}
 	insert_point=rest.begin();
 	for(;rest.size()>0;)
@@ -172,7 +180,6 @@ void Pmerge::mergelist_vector(int level, std::vector<int> &seq)
 			break;
 		result.insert(result.end(),**insert_point);
 		std::advance(insert_point, 1);
-
 	}
 	seq.clear();
 	seq = result;
@@ -186,9 +193,10 @@ void Pmerge::mergelist_deque(int level, std::deque<int> &seq)
 	size_t impair = (unit_nbr %2);
 	std::deque<int>::iterator a, b;
 
-	////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
 	//APPAIRAGE DES CHIFFRES, EN RECURSION
-	////////////////////////////////////////
+	//COMPARE DEUX CHIFFRES. SWAP LE BLOCK DE PAIRE SI GAUCHE < DROITE
+	//////////////////////////////////////////////////////////////////////////
 	if (unit_nbr < 2)
 		return ;
 	a = seq.begin();
@@ -235,9 +243,10 @@ void Pmerge::mergelist_deque(int level, std::deque<int> &seq)
 	for (std::advance(a, 1);a!=seq.end();std::advance(a, 1))
 		rest.insert(rest.end(), a);
 
-	////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////
 	//INSERTION DU PEND DANS MAIN SUIVANT LA SUITE DE JACOBSTHAL
-	////////////////////////////////////////////////////////////
+	//insertion utilisant un binary search avec la fonction upperbound
+	////////////////////////////////////////////////////////////////////////////////////
 	size_t jackval = 1, prevjack = 1;
 	for(size_t k = 1, x = 0;x<pend.size(); k++, prevjack=jackval, jackval=_jacobsthal_number(k))
 	{

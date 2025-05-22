@@ -44,12 +44,13 @@ class Pmerge
 		class SortingFailed : public std::exception {
 			virtual const char* what() const throw();
 		};
+		std::vector<int>& Get_vectored(void);
+		std::deque<int>& Get_dequed(void);
 
-		std::vector<int> _vectored;
-		std::deque<int> _dequed;
-
-	private:
-		int _n;
+		private:
+			std::vector<int> _vectored;
+			std::deque<int> _dequed;
+			int _n;
 
 };
 
